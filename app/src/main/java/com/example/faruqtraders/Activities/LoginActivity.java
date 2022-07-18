@@ -190,7 +190,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     progressBar.setVisibility(View.GONE);
                     showToast("Login Success");
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
-
                     SessionDataModel dataModel = new SessionDataModel(response.body().getAccess_token(), loginEmail, loginPassword);
                     sessionManagement.setLoginSession(dataModel);
 
@@ -220,6 +219,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
         registerReceiver(networkChangeListener, filter);
+
+        if (!sessionManagement.getSessionModel().getUserPhone().equals("null")){
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        }
+        else {
+
+        }
+
         super.onStart();
     }
 

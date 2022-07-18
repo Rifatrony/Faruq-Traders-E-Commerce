@@ -57,7 +57,7 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
 
             subtotalAmountInt = Integer.parseInt(getIntent().getStringExtra("grandTotal"));
 
-            subtotalAmount.setText(String.valueOf(subtotalAmountInt));
+            subtotalAmount.setText(String.valueOf(subtotalAmountInt) +" ৳");
 
 
         }

@@ -11,7 +11,9 @@ import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.example.faruqtraders.MainActivity;
 import com.example.faruqtraders.R;
 import com.example.faruqtraders.Session.SessionManagement;
 import com.example.faruqtraders.Utility.NetworkChangeListener;
@@ -55,6 +57,9 @@ public class CheckoutNextActivity extends AppCompatActivity implements View.OnCl
 
 
         sessionManagement = new SessionManagement(this);
+        /*if (!sessionManagement.getSessionModel().getUserPhone().equals("null")){
+
+        }*/
 
     }
 
