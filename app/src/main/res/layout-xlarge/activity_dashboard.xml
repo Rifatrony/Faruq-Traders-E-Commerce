@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.DashboardActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_layout"
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolBar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:navigationIcon="@drawable/back"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:title="Dashboard"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/constraint_layout"
+            >
+
+            <!--Use here scroll view and inside scroll view use Linear Layout for next design-->
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/ll1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="10dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="55dp"
+                            android:layout_margin="6dp"
+                            android:gravity="center_vertical"
+                            android:text="Hello" />
+
+                        <TextView
+                            android:id="@+id/userNameText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="55dp"
+                            android:layout_margin="6dp"
+                            android:gravity="center_vertical"
+                            android:text="Rifat Ahmed Rony"
+                            />
+
+                        <TextView
+                            android:id="@+id/emailText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="55dp"
+                            android:layout_margin="6dp"
+                            android:gravity="center_vertical"
+                            android:text="Rifat Ahmed Rony"
+                            />
+
+                        <TextView
+                            android:id="@+id/phoneText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="55dp"
+                            android:layout_margin="6dp"
+                            android:gravity="center_vertical"
+                            android:text="Rifat Ahmed Rony"
+                            tools:ignore="DuplicateIds" />
+
+
+                    </LinearLayout>
+
+
+                    <TextView
+                        android:id="@+id/accountsTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="30dp"
+                        android:text="Accounts"
+                        android:textSize="32sp"
+                        android:textStyle="bold"
+                        android:padding="20dp"
+                        android:textColor="@color/black"
+                        android:drawableEnd="@drawable/forward"
+                        android:drawableStart="@drawable/account"
+                        android:drawablePadding="16dp"
+                        app:drawableTint="@color/yellow"
+                        />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@color/black"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="35dp"
+                        />
+
+                    <TextView
+                        android:id="@+id/orderTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:text="@string/order"
+                        android:textSize="32sp"
+                        android:textStyle="bold"
+                        android:padding="20dp"
+                        android:textColor="@color/black"
+                        android:drawableEnd="@drawable/forward"
+                        android:drawableStart="@drawable/note"
+                        android:drawablePadding="16dp"
+                        app:drawableTint="@color/yellow" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@color/black"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="35dp"
+                        />
+
+                    <TextView
+                        android:id="@+id/wishListTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:text="@string/wishlist"
+                        android:textSize="32sp"
+                        android:textStyle="bold"
+                        android:padding="20dp"
+                        android:textColor="@color/black"
+                        android:drawableEnd="@drawable/forward"
+                        android:drawableStart="@drawable/favorite"
+                        android:drawablePadding="16dp"
+                        app:drawableTint="@color/yellow" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@color/black"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="35dp"
+                        />
+
+                    <TextView
+                        android:id="@+id/goToHomeTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:text="Go to Home"
+                        android:textSize="32sp"
+                        android:textStyle="bold"
+                        android:padding="20dp"
+                        android:textColor="@color/black"
+                        android:drawableEnd="@drawable/forward"
+                        android:drawableStart="@drawable/home"
+                        android:drawablePadding="16dp"
+                        app:drawableTint="@color/yellow" />
+
+                </LinearLayout>
+
+            </ScrollView>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

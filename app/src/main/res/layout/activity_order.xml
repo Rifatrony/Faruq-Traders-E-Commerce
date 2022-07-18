@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.OrderActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_layout"
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imageBack"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/back"
+                android:tint="@color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/order"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:padding="10dp"
+                app:layout_constraintBottom_toBottomOf="@id/imageBack"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/imageBack" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/constraint_layout">
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:stretchColumns="1,2,3,4,5"
+                android:padding="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TableRow
+                    android:background="@color/yellow"
+                    >
+
+                    <TextView
+                        android:text="Order"
+                        android:textSize="16sp"
+                        android:layout_column="1"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:gravity="center"
+                        android:padding="10dp"/>
+                    <TextView
+                        android:text="Date"
+                        android:textSize="16sp"
+                        android:textColor="@color/white"
+                        android:layout_column="1"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:padding="10dp"/>
+
+                    <TextView
+                        android:text="Status"
+                        android:textSize="16sp"
+                        android:textColor="@color/white"
+                        android:layout_column="1"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:padding="10dp"/>
+
+                    <TextView
+                        android:text="Total"
+                        android:textSize="16sp"
+                        android:textColor="@color/white"
+                        android:layout_column="1"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:padding="10dp"/>
+
+                    <TextView
+                        android:text="Action"
+                        android:textSize="16sp"
+                        android:textColor="@color/white"
+                        android:layout_column="1"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:padding="10dp"/>
+
+
+                </TableRow>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/orderRecyclerView"
+                    android:layout_marginTop="8dp"
+                    />
+
+            </TableLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
