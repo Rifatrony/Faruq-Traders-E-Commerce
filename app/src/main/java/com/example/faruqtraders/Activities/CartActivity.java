@@ -109,8 +109,6 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
 
         sessionManagement = new SessionManagement(this);
 
-
-
     }
 
     private void setListener(){
@@ -133,8 +131,6 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(new Intent(getApplicationContext(), LoginActivity.class));
 
         }
-
-
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -163,16 +159,10 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
                 if (response.body() != null) {
 
                     responseModel = response.body();
-
                     System.out.println("List size: "+responseModel.data.size());
                     setAdapter(responseModel);
 
-
-
-
                 }
-
-
             }
 
             @Override
@@ -180,7 +170,6 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
 
             }
         });
-
 
     }
 
@@ -223,14 +212,11 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
     @SuppressLint("SetTextI18n")
     @Override
     public void setGrandTotal(int grandTotal) {
-
-
        // grand_total.setText(""+grandTotal);
 
         for (int i = 0; i < responseModel.data.size(); i++) {
 
             grand_total_amount = grand_total_amount + (int) responseModel.data.get(i).total;
-
 
         }
 
@@ -241,19 +227,11 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-
-
-
     public void printGrandTotal (int grandTotalAmount){
 
-
         for (int i = 0; i < responseModel.data.size(); i++) {
-
             grand_total_amount = grand_total_amount + (int) responseModel.data.get(i).total;
-
-
         }
-
         grand_total.setText(String.valueOf(grand_total_amount+" ৳"));
 
     }

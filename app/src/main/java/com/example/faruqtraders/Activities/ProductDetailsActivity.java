@@ -267,17 +267,9 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
             @Override
             public void onResponse(Call<AddCartResponse> call, Response<AddCartResponse> response) {
 
-                if (response.body() != null) {
-
-                    if (response.code() == 200) {
-
-                        Toast.makeText(ProductDetailsActivity.this, "Added To cart", Toast.LENGTH_SHORT).show();
-
-                    }
+                if (response.body() != null && response.code() == 200) {
+                    Toast.makeText(ProductDetailsActivity.this, "Added To cart", Toast.LENGTH_SHORT).show();
                 }
-
-
-
             }
 
             @Override
@@ -287,10 +279,6 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
 
             }
         });
-
-
-
-
 
     }
 

@@ -11,24 +11,34 @@ import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.faruqtraders.API.RetrofitClientWithHeader;
 import com.example.faruqtraders.MainActivity;
 import com.example.faruqtraders.R;
+import com.example.faruqtraders.Response.UserDetailsResponse;
 import com.example.faruqtraders.Session.SessionManagement;
 import com.example.faruqtraders.Utility.NetworkChangeListener;
+import com.google.android.material.navigation.NavigationView;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CheckoutNextActivity extends AppCompatActivity implements View.OnClickListener {
 
     NetworkChangeListener networkChangeListener = new NetworkChangeListener();
 
     AppCompatImageView imageView;
-    EditText nameEditText, emailEditText, numberEditText;
+    EditText nameEditText, emailEditText, numberEditText, addressEditText;
     AppCompatButton placeOrderButton;
 
     String name, email;
     int deliveryChargeInsideDhaka;
     SessionManagement sessionManagement;
+
+    public static UserDetailsResponse userDetailsResponse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,45 +47,52 @@ public class CheckoutNextActivity extends AppCompatActivity implements View.OnCl
 
         initialization();
         setListener();
-        received_product_details();
 
         deliveryChargeInsideDhaka = getIntent().getIntExtra("charge",1);
         System.out.println("charge is === >" + deliveryChargeInsideDhaka);
 
+        RetrofitClientWithHeader.getRetrofitClient(this).getUserDetails().enqueue(new Callback<UserDetailsResponse>() {
+            @Override
+            public void onResponse(Call<UserDetailsResponse> call, Response<UserDetailsResponse> response) {
+                if (response.isSuccessful()) {
+                    userDetailsResponse = response.body();
 
+                    assert userDetailsResponse != null;
+                    nameEditText.setText(userDetailsResponse.user.name);
+                    emailEditText.setText(userDetailsResponse.user.email);
+                    numberEditText.setText(userDetailsResponse.user.phone);
+                    addressEditText.setText(userDetailsResponse.user.address);
+                }
+            }
 
+            @Override
+            public void onFailure(Call<UserDetailsResponse> call, Throwable t) {
+            }
+        });
 
     }
 
     private void initialization(){
+
         imageView = findViewById(R.id.imageBack);
 
         nameEditText = findViewById(R.id.nameEditText);
         emailEditText = findViewById(R.id.emailEditText);
         numberEditText = findViewById(R.id.numberEditText);
+        addressEditText = findViewById(R.id.addressEditText);
         placeOrderButton = findViewById(R.id.placeOrderButton);
 
-
         sessionManagement = new SessionManagement(this);
-        /*if (!sessionManagement.getSessionModel().getUserPhone().equals("null")){
-
-        }*/
 
     }
 
     private void setListener(){
+
         imageView.setOnClickListener(this);
         placeOrderButton.setOnClickListener(this);
 
     }
 
-    private void received_product_details(){
-        name = getIntent().getStringExtra("name");
-        email = getIntent().getStringExtra("email");
-
-        nameEditText.setText(name);
-        emailEditText.setText(email);
-    }
 
     @SuppressLint("NonConstantResourceId")
     @Override
@@ -84,10 +101,12 @@ public class CheckoutNextActivity extends AppCompatActivity implements View.OnCl
         switch (view.getId()){
             case R.id.imageBack:
                 onBackPressed();
-                return;
+                break;
+
             case R.id.placeOrderButton:
                 goForOrder();
                 break;
+
             default:
                 break;
 

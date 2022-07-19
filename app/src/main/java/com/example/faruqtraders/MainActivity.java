@@ -31,6 +31,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.faruqtraders.API.ApiInterface;
 import com.example.faruqtraders.API.RetrofitClient;
+import com.example.faruqtraders.API.RetrofitClientWithHeader;
 import com.example.faruqtraders.Activities.AboutUsActivity;
 import com.example.faruqtraders.Activities.AllCategoryActivity;
 import com.example.faruqtraders.Activities.CartActivity;
@@ -52,6 +53,7 @@ import com.example.faruqtraders.Adapter.TopInCategoriesAdapter;
 import com.example.faruqtraders.Model.ImageModel;
 import com.example.faruqtraders.Response.ApiResponseModel;
 import com.example.faruqtraders.Response.BannerResponse;
+import com.example.faruqtraders.Response.UserDetailsResponse;
 import com.example.faruqtraders.Response.VisitedProductResponse;
 import com.example.faruqtraders.Session.SessionManagement;
 import com.example.faruqtraders.Utility.NetworkChangeListener;
@@ -127,6 +129,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     String name, email, phone;
 
     SessionManagement sessionManagement;
+    public  static UserDetailsResponse userDetailsResponse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -153,7 +156,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         email = getIntent().getStringExtra("email");
         phone = getIntent().getStringExtra("name");
 
-        updateHeaderFromRegister();
+        //updateHeaderFromRegister();
+
+        RetrofitClientWithHeader.getRetrofitClient(this).getUserDetails().enqueue(new Callback<UserDetailsResponse>() {
+            @Override
+            public void onResponse(Call<UserDetailsResponse> call, Response<UserDetailsResponse> response) {
+                if (response.isSuccessful()){
+                    userDetailsResponse = response.body();
+
+                    NavigationView navigationView = findViewById(R.id.navigation_view);
+                    View headerView = navigationView.getHeaderView(0);
+
+                    TextView navUserName = headerView.findViewById(R.id.user_name);
+                    TextView navUserEmail = headerView.findViewById(R.id.user_email);
+                    TextView navUserNumber = headerView.findViewById(R.id.user_phone);
+
+                    try {
+                        navUserName.setText(userDetailsResponse.user.name);
+                        navUserEmail.setText(userDetailsResponse.user.email);
+                        navUserNumber.setText(userDetailsResponse.user.phone);
+                        Toast.makeText(MainActivity.this, userDetailsResponse.user.name, Toast.LENGTH_SHORT).show();
+
+                    }
+                    catch (Exception e){
+
+                    }
+                  }
+            }
+
+            @Override
+            public void onFailure(Call<UserDetailsResponse> call, Throwable t) {
+                Toast.makeText(MainActivity.this, "Failure "+ t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -190,10 +225,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     case R.id.nav_favourite:
                         startActivity(new Intent(getApplicationContext(), WishlistActivity.class));
                         //Toast.makeText(MainActivity.this, "Favourite", Toast.LENGTH_SHORT).show();
-                        break;
-
-                    case R.id.nav_login:
-                        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                         break;
 
                     case R.id.nav_logout:
@@ -305,16 +336,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void updateHeaderFromRegister(){
-        NavigationView navigationView = findViewById(R.id.navigation_view);
-        View headerView = navigationView.getHeaderView(0);
 
-        TextView navUserName = headerView.findViewById(R.id.user_name);
-        TextView navUserEmail = headerView.findViewById(R.id.user_email);
-        TextView navUserNumber = headerView.findViewById(R.id.user_phone);
 
-        navUserName.setText(name);
-        navUserEmail.setText(email);
-        navUserNumber.setText(phone);
 
     }
 
@@ -339,7 +362,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 showToast("Logout");
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                sessionManagement.removeLoginSession();
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                 finish();
             }
         });

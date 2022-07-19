@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.faruqtraders.API.RetrofitClient;
+import com.example.faruqtraders.API.RetrofitClientWithHeader;
 import com.example.faruqtraders.MainActivity;
 import com.example.faruqtraders.R;
 import com.example.faruqtraders.Response.UserDetailsResponse;
@@ -30,10 +31,10 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
     Toolbar toolbar;
 
-    TextView userNameText, goToHomeTextView, emailTextView, phoneTextView, addressTextView;
+    TextView userNameText, goToHomeTextView;
     TextView accountsTextView, orderTextView, wishListTextView;
 
-    UserDetailsResponse userDetailsResponse;
+    public static UserDetailsResponse userDetailsResponse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +44,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         initialization();
         setListener();
 
-        getUserDetails();
+        //getUserDetails();
 
         setSupportActionBar(toolbar);
 
@@ -61,6 +62,28 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
         System.out.println("............................\n Receive Name : " + name + "\n Receive Email : "+ email + "\n Receive Phone : " + phone);
 
+
+        RetrofitClientWithHeader.getRetrofitClient(this).getUserDetails().enqueue(new Callback<UserDetailsResponse>() {
+            @Override
+            public void onResponse(Call<UserDetailsResponse> call, Response<UserDetailsResponse> response) {
+                if (response.isSuccessful()){
+                    userDetailsResponse = response.body();
+                    assert userDetailsResponse != null;
+                    try {
+                        userNameText.setText(userDetailsResponse.user.name+", ");
+
+                    }catch (Exception e){
+
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UserDetailsResponse> call, Throwable t) {
+                Toast.makeText(DashboardActivity.this, "Failure "+ t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     private void getUserDetails() {
@@ -68,10 +91,13 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         RetrofitClient.getRetrofitClient().getUserDetails().enqueue(new Callback<UserDetailsResponse>() {
             @Override
             public void onResponse(Call<UserDetailsResponse> call, Response<UserDetailsResponse> response) {
-                if (response.body() != null){
+
+                if (response.body() != null && response.code() == 200){
 
                     userDetailsResponse = response.body();
-                    System.out.println("Name is=========>" + userDetailsResponse.getUser().getName());
+                    System.out.println("Name is=========>" + userDetailsResponse.user.name);
+
+                    System.out.println("Get user block");
                     System.out.println("Name is=========>" + userDetailsResponse.user.email);
                     Toast.makeText(DashboardActivity.this, "Success", Toast.LENGTH_SHORT).show();
 
@@ -84,6 +110,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
             @Override
             public void onFailure(Call<UserDetailsResponse> call, Throwable t) {
+                System.out.println(t.getMessage());
                 Toast.makeText(DashboardActivity.this, "Failure " +t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -92,10 +119,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     private void initialization() {
         toolbar = findViewById(R.id.toolBar);
         userNameText = findViewById(R.id.userNameText);
-        emailTextView = findViewById(R.id.emailText);
-        phoneTextView = findViewById(R.id.phoneText);
         goToHomeTextView = findViewById(R.id.goToHomeTextView);
-
 
         accountsTextView = findViewById(R.id.accountsTextView);
         orderTextView = findViewById(R.id.orderTextView);
@@ -107,6 +131,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         accountsTextView.setOnClickListener(this);
         orderTextView.setOnClickListener(this);
         wishListTextView.setOnClickListener(this);
+        goToHomeTextView.setOnClickListener(this);
 
     }
 

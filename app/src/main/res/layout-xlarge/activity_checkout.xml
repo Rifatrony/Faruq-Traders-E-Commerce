@@ -206,10 +206,10 @@
                             />
 
                         <TextView
+                            android:id="@+id/grandTotalTextView"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:text="1000 Tk."
                             android:gravity="end|center_vertical"
                             android:padding="16dp"
                             android:textColor="@color/black"

@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.faruqtraders.API.RetrofitClient;
+import com.example.faruqtraders.API.RetrofitClientWithHeader;
 import com.example.faruqtraders.R;
 import com.example.faruqtraders.Response.UserDetailsResponse;
 
@@ -34,11 +35,12 @@ public class AccountDetailsActivity extends AppCompatActivity implements View.On
 
         initialization();
         setListener();
-        //getProfileDetails();
+        getProfileDetails();
 
     }
 
     private void initialization() {
+
         updateNameEditText = findViewById(R.id.updateNameEditText);
         updateEmailEditText = findViewById(R.id.updateEmailEditText);
         updatePhoneEditText = findViewById(R.id.updatePhoneEditText);
@@ -73,23 +75,28 @@ public class AccountDetailsActivity extends AppCompatActivity implements View.On
     }
 
     private void getProfileDetails(){
-        RetrofitClient.getRetrofitClient().updateProfile("Rifat","id18103088@gmail.com","01628979644","Uttara").enqueue(new Callback<UserDetailsResponse>() {
+        RetrofitClientWithHeader.getRetrofitClient(this).getUserDetails().enqueue(new Callback<UserDetailsResponse>() {
             @Override
             public void onResponse(Call<UserDetailsResponse> call, Response<UserDetailsResponse> response) {
                 if (response.body() != null){
 
                     userDetailsResponse = response.body();
 
-                    System.out.println("Name is ===>" + userDetailsResponse.user.name);
-                    System.out.println("Email is ===>" + userDetailsResponse.user.email);
-                    System.out.println("Phone is ===>" + userDetailsResponse.user.phone);
+                    try {
+                        updateNameEditText.setText(userDetailsResponse.user.name);
+                        updateEmailEditText.setText(userDetailsResponse.user.email);
+                        updatePhoneEditText.setText(userDetailsResponse.user.phone);
+                    }catch (Exception e){
+
+                    }
+
 
                 }
             }
 
             @Override
             public void onFailure(Call<UserDetailsResponse> call, Throwable t) {
-
+                System.out.println("\n\n"+t.getMessage());
             }
         });
     }

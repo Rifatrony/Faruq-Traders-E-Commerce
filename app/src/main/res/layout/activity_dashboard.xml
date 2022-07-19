@@ -15,31 +15,6 @@
             android:layout_width="match_parent"
             android:layout_height="60dp">
 
-            <!--<androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/imageBack"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="16dp"
-                android:src="@drawable/back"
-                android:tint="@color/black"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="Dashboard"
-                android:textColor="@color/black"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:padding="10dp"
-                app:layout_constraintBottom_toBottomOf="@id/imageBack"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/imageBack" />-->
-
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolBar"
                 android:layout_width="match_parent"
@@ -75,47 +50,68 @@
 
                     <LinearLayout
                         android:id="@+id/ll1"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
+                        android:orientation="vertical"
                         android:padding="10dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="55dp"
-                            android:layout_margin="6dp"
-                            android:gravity="center_vertical"
-                            android:text="Hello" />
-
-                        <TextView
-                            android:id="@+id/userNameText"
-                            android:layout_width="wrap_content"
-                            android:layout_height="55dp"
-                            android:layout_margin="6dp"
-                            android:gravity="center_vertical"
-                            android:text="Rifat Ahmed Rony"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Welcome to Faruq Traders"
+                            android:textColor="@color/black"
+                            android:padding="16dp"
+                            android:gravity="center"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="6dp"
+                            android:fontFamily="sans-serif"
                             />
 
-                        <TextView
-                            android:id="@+id/emailText"
-                            android:layout_width="wrap_content"
-                            android:layout_height="55dp"
-                            android:layout_margin="6dp"
-                            android:gravity="center_vertical"
-                            android:text="Rifat Ahmed Rony"
-                            />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center"
+                            >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="55dp"
+                                android:layout_margin="6dp"
+                                android:textColor="@color/black"
+                                android:textSize="16sp"
+                                android:gravity="center_vertical"
+                                android:text="Hello" />
+
+                            <TextView
+                                android:id="@+id/userNameText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="55dp"
+                                android:textColor="@color/black"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:layout_margin="6dp"
+                                android:gravity="center_vertical"
+                                android:text="Mr. "
+                                />
+
+                        </LinearLayout>
+
 
                         <TextView
-                            android:id="@+id/phoneText"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="55dp"
                             android:layout_margin="6dp"
-                            android:gravity="center_vertical"
-                            android:text="Rifat Ahmed Rony"
-                            tools:ignore="DuplicateIds" />
+                            android:gravity="center"
+                            android:text="From Your Dashboard you can view"
+                            android:textStyle="normal"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+                            />
 
 
                     </LinearLayout>

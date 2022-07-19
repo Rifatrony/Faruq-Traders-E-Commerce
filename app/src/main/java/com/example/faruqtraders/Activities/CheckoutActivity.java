@@ -36,12 +36,13 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
 
     String name, email;
     TextView nextTextView;
-    TextView subtotalAmount;
+    TextView subtotalAmount, grandTotalTextView;
 
     RadioGroup radioGroup;
     RadioButton radioButton;
 
     int subtotalAmountInt;
+    int grandTotal;
     int deliveryChargeInsideDhaka = 80, deliveryChargeOutsideDhaka = 150, deliveryChargeInGulshanBanani = 0 ;
 
     DeliveryMethodResponse deliveryMethodResponse;
@@ -54,12 +55,8 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
         initialization();
 
         if (getIntent().getStringExtra("grandTotal") != null) {
-
             subtotalAmountInt = Integer.parseInt(getIntent().getStringExtra("grandTotal"));
-
             subtotalAmount.setText(String.valueOf(subtotalAmountInt) +" ৳");
-
-
         }
 
 
@@ -69,6 +66,8 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
         fetchDeliveryMethod();
 
         System.out.println("Check Delivery");
+
+
 
     }
 
@@ -80,6 +79,7 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
         radioGroup = findViewById(R.id.radioGroup);
         nextTextView = findViewById(R.id.nextTextView);
         subtotalAmount = findViewById(R.id.subtotalAmout);
+        grandTotalTextView = findViewById(R.id.grandTotalTextView);
 
     }
 
@@ -126,20 +126,19 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
         switch (radioId){
             case R.id.radio_one:
 
-                showToast("Inside Dhaka deliver Charge is " + deliveryChargeInsideDhaka);
-                Intent intent = new Intent(getApplicationContext(), CheckoutNextActivity.class);
-                intent.putExtra("charge", deliveryChargeInsideDhaka);
-                startActivity(intent);
-
+                grandTotal = subtotalAmountInt + deliveryChargeInsideDhaka;
+                grandTotalTextView.setText(String.valueOf(grandTotal) +" ৳");
+                System.out.println("Grand total " + grandTotal +" ৳");
                 break;
 
             case R.id.radio_two:
-                showToast("Outside Dhaka deliver Charge is " + deliveryChargeOutsideDhaka);
+                grandTotal = subtotalAmountInt + deliveryChargeOutsideDhaka;
+                grandTotalTextView.setText(String.valueOf(grandTotal)+" ৳");
                 break;
 
             case R.id.radio_three:
-                /*We can use intent here for change the activity*/
-                showToast("Gulshan & Banani Free Delivery is "+ deliveryChargeInGulshanBanani);
+                grandTotal = subtotalAmountInt + deliveryChargeInGulshanBanani;
+                grandTotalTextView.setText(String.valueOf(grandTotal)+" ৳");
                 break;
 
         }

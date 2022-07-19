@@ -132,7 +132,7 @@ public interface ApiInterface {
 
     );
 
-    @GET("user/profile")
+    @GET("user/dashboard")
     Call<UserDetailsResponse> getUserDetails();
 
 

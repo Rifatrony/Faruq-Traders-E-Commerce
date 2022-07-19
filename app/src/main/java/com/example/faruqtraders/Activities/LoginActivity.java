@@ -192,7 +192,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     SessionDataModel dataModel = new SessionDataModel(response.body().getAccess_token(), loginEmail, loginPassword);
                     sessionManagement.setLoginSession(dataModel);
-
+                    finish();
 
                 }
                 else {
@@ -222,11 +222,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         if (!sessionManagement.getSessionModel().getUserPhone().equals("null")){
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            finish();
         }
         else {
 
         }
-
         super.onStart();
     }
 
