@@ -14,9 +14,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.faruqtraders.API.RetrofitClient;
 import com.example.faruqtraders.API.RetrofitClientWithHeader;
 import com.example.faruqtraders.MainActivity;
 import com.example.faruqtraders.R;
+import com.example.faruqtraders.Response.DeliveryMethodResponse;
+import com.example.faruqtraders.Response.OrderResponse;
 import com.example.faruqtraders.Response.UserDetailsResponse;
 import com.example.faruqtraders.Session.SessionManagement;
 import com.example.faruqtraders.Utility.NetworkChangeListener;
@@ -114,8 +117,27 @@ public class CheckoutNextActivity extends AppCompatActivity implements View.OnCl
     }
 
     private void goForOrder() {
-        Intent intent = new Intent(getApplicationContext(), OrderActivity.class);
-        startActivity(intent);
+
+        RetrofitClient.getRetrofitClient().placeOrder(nameEditText.getText().toString(), emailEditText.getText().toString(), numberEditText.getText().toString(), "Inside Dhaka", addressEditText.getText().toString()).enqueue(new Callback<OrderResponse>() {
+            @Override
+            public void onResponse(Call<OrderResponse> call, Response<OrderResponse> response) {
+                if (response.body() != null && response.code() == 200){
+                    Intent intent = new Intent(getApplicationContext(), OrderActivity.class);
+                    startActivity(intent);
+                    Toast.makeText(CheckoutNextActivity.this, "Order Successful", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(CheckoutNextActivity.this, response.errorBody().toString(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<OrderResponse> call, Throwable t) {
+                Toast.makeText(CheckoutNextActivity.this, "Failure", Toast.LENGTH_SHORT).show();
+                System.out.println("\n\n\n " + t.getMessage());
+            }
+        });
+
     }
 
     @Override

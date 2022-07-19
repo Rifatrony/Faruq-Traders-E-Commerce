@@ -156,14 +156,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     passwordEditText.setText("");
                     confirmPasswordEditText.setText("");
 
-                    System.out.println("Registration User Name is ====== > " + name);
-                    System.out.println("Registration User Email is ====== > " + email);
-                    System.out.println("Registration User Name is ====== > " + phone);
-
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    intent.putExtra("name", name);
-                    intent.putExtra("email", email);
-                    intent.putExtra("phone", phone);
+                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
 
                     startActivity(intent);
 

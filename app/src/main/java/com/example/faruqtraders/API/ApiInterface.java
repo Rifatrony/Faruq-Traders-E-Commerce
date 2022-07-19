@@ -17,6 +17,7 @@ import com.example.faruqtraders.Response.DeliveryMethodResponse;
 import com.example.faruqtraders.Response.EachProductResponse;
 import com.example.faruqtraders.Response.FilterResponseModel;
 import com.example.faruqtraders.Response.LoginResponse;
+import com.example.faruqtraders.Response.OrderResponse;
 import com.example.faruqtraders.Response.ProductDetailsResponseModel;
 import com.example.faruqtraders.Response.UserDetailsResponse;
 import com.example.faruqtraders.Response.UserRegisterResponse;
@@ -27,6 +28,7 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -118,10 +120,26 @@ public interface ApiInterface {
             @Body AddToCartPostModel addToCartPostModel
     );
 
+    /*@DELETE("carts/{path}/delete"){
+
+    }*/
+
 
 
     @GET("carts")
     Call<CartResponseModel> getCartDetails();
+
+    @GET("carts/{path}/increment")
+    Call<CartResponseModel> incrementCart(
+            @Path("path") String product_id
+    );
+
+
+    @GET("carts/{path}/decrement")
+    Call<CartResponseModel> decrementCart(
+            @Path("path") String product_id
+    );
+
 
     @POST("user/profile/update")
     Call<UserDetailsResponse> updateProfile(
@@ -151,7 +169,7 @@ public interface ApiInterface {
 
     @FormUrlEncoded
     @POST("checkout/process")
-    Call<DeliveryMethodResponse> placeOrder(
+    Call<OrderResponse> placeOrder(
             @Field("name") String name,
             @Field("email") String email,
             @Field("phone") String phone,

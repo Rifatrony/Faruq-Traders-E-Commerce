@@ -13,11 +13,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.faruqtraders.API.RetrofitClientWithHeader;
 import com.example.faruqtraders.R;
 import com.example.faruqtraders.RecyclerViewInterface.CartAdapterInterface;
 import com.example.faruqtraders.Response.CartResponseModel;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CartDetailsAdapter extends RecyclerView.Adapter<CartDetailsAdapter.CartViewHolder> {
 
@@ -44,7 +49,7 @@ public class CartDetailsAdapter extends RecyclerView.Adapter<CartDetailsAdapter.
 
     @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(@NonNull CartViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CartViewHolder holder, @SuppressLint("RecyclerView") int position) {
         if (cartResponseModel.data.size() > 0 ){
 
             try {
@@ -60,6 +65,66 @@ public class CartDetailsAdapter extends RecyclerView.Adapter<CartDetailsAdapter.
                 subTotal = (int)cartResponseModel.data.get(position).total;
 
                 holder.sub_total_amount_each_cart.setText(String.valueOf(subTotal+".0"));
+
+                String id = cartResponseModel.data.get(position).product.id;
+
+                holder.deleteCartButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        Toast.makeText(context, cartResponseModel.data.get(position).product.name, Toast.LENGTH_SHORT).show();
+                    }
+                });
+                holder.increase_image_button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+
+
+                        RetrofitClientWithHeader.getRetrofitClient(context).incrementCart(id).enqueue(new Callback<CartResponseModel>() {
+                            @Override
+                            public void onResponse(Call<CartResponseModel> call, Response<CartResponseModel> response) {
+                                if (response.body() != null && response.code() == 200){
+
+                                    int qnty = Integer.parseInt(cartResponseModel.data.get(position).quantity) + 1;
+                                    Toast.makeText(context, "Quantity is " + qnty, Toast.LENGTH_SHORT).show();
+
+                                }
+                                else {
+                                    Toast.makeText(context, response.errorBody().toString(), Toast.LENGTH_SHORT).show();
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<CartResponseModel> call, Throwable t) {
+                                Toast.makeText(context, t.getMessage(), Toast.LENGTH_SHORT).show();
+                                System.out.println("\n\n\n\n " + t.getMessage());
+                            }
+                        });
+                    }
+                });
+
+                holder.decrease_image_button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        RetrofitClientWithHeader.getRetrofitClient(context).decrementCart(id).enqueue(new Callback<CartResponseModel>() {
+                            @Override
+                            public void onResponse(Call<CartResponseModel> call, Response<CartResponseModel> response) {
+                                if (response.body() != null && response.code() == 200){
+
+                                    int qnty = Integer.parseInt(cartResponseModel.data.get(position).quantity) - 1;
+                                    Toast.makeText(context, "Quantity is " + qnty, Toast.LENGTH_SHORT).show();
+
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<CartResponseModel> call, Throwable t) {
+
+                            }
+                        });
+                    }
+                });
 
 
              /*   for (int i = 0; i < cartResponseModel.data.size(); i++) {

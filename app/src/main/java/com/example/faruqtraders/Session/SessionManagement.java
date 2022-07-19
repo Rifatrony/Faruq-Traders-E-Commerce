@@ -20,9 +20,6 @@ public class SessionManagement {
     String userPhone;
     String password;
 
-
-
-
     public SessionManagement() {
     }
 
@@ -38,13 +35,11 @@ public class SessionManagement {
         this.accessToken = model.getAccessToken();
         this.password = model.getPassword();
 
-
         editor.putString(SESSION_KEY_1, password).commit();
         editor.putString(SESSION_KEY_2, accessToken).commit();
         editor.putString(SESSION_KEY_3, userPhone).commit();
 
     }
-
 
     public SessionDataModel getSessionModel() {
 
@@ -52,21 +47,15 @@ public class SessionManagement {
         password = sharedPreferences.getString(SESSION_KEY_1, "null");
         accessToken = sharedPreferences.getString(SESSION_KEY_2, "null");
 
-
         return new SessionDataModel(accessToken, userPhone, password);
-
 
     }
 
     public void removeLoginSession() {
-
 
         editor.putString(SESSION_KEY_1, "null").commit();
         editor.putString(SESSION_KEY_2, "null").commit();
         editor.putString(SESSION_KEY_3, "null").commit();
 
     }
-
-
-
 }

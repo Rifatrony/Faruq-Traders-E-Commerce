@@ -53,27 +53,23 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_checkout);
 
         initialization();
+        fetchDeliveryMethod();
 
         if (getIntent().getStringExtra("grandTotal") != null) {
             subtotalAmountInt = Integer.parseInt(getIntent().getStringExtra("grandTotal"));
             subtotalAmount.setText(String.valueOf(subtotalAmountInt) +" ৳");
         }
 
-
         setListener();
         received_product_details();
-
-        fetchDeliveryMethod();
-
         System.out.println("Check Delivery");
-
-
 
     }
 
 
 
     private void initialization(){
+
         imageView = findViewById(R.id.imageBack);
 
         radioGroup = findViewById(R.id.radioGroup);
@@ -156,7 +152,11 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
             public void onResponse(Call<DeliveryMethodResponse> call, Response<DeliveryMethodResponse> response) {
                 if (response.body() != null){
                     deliveryMethodResponse = response.body();
+                    Toast.makeText(CheckoutActivity.this, deliveryMethodResponse.name, Toast.LENGTH_SHORT).show();
                     System.out.println("Response is ------>  "+ response.body());
+                }
+                else {
+                    Toast.makeText(CheckoutActivity.this, response.errorBody().toString(), Toast.LENGTH_SHORT).show();
                 }
             }
 

@@ -151,11 +151,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         System.out.println("User Phone: "+sessionManagement.getSessionModel().getUserPhone());
 
-
-        name = getIntent().getStringExtra("name");
-        email = getIntent().getStringExtra("email");
-        phone = getIntent().getStringExtra("name");
-
         //updateHeaderFromRegister();
 
         RetrofitClientWithHeader.getRetrofitClient(this).getUserDetails().enqueue(new Callback<UserDetailsResponse>() {
@@ -175,8 +170,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         navUserName.setText(userDetailsResponse.user.name);
                         navUserEmail.setText(userDetailsResponse.user.email);
                         navUserNumber.setText(userDetailsResponse.user.phone);
-                        Toast.makeText(MainActivity.this, userDetailsResponse.user.name, Toast.LENGTH_SHORT).show();
-
                     }
                     catch (Exception e){
 
@@ -231,13 +224,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         signOut();
                         break;
 
-                    case R.id.nav_share:
+                    /*case R.id.nav_share:
                         Intent intent = new Intent(Intent.ACTION_SEND);
                         intent.setType("text/plain");
                         intent.putExtra(Intent.EXTRA_SUBJECT,"Check this application");
                         intent.putExtra(Intent.EXTRA_TEXT,"https://play.google.com/store/apps/details?id=com.whatsapp");
                         startActivity(Intent.createChooser(intent,"Share Via"));
-                        break;
+                        break;*/
 
                     case R.id.nav_contact:
                         startActivity(new Intent(getApplicationContext(), ContactUsActivity.class));

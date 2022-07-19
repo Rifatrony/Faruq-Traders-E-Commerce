@@ -188,7 +188,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 if (response.body() != null){
                     signInButton.setVisibility(View.VISIBLE);
                     progressBar.setVisibility(View.GONE);
-                    showToast("Login Success");
+                    showToast("Login Successfully");
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     SessionDataModel dataModel = new SessionDataModel(response.body().getAccess_token(), loginEmail, loginPassword);
                     sessionManagement.setLoginSession(dataModel);
