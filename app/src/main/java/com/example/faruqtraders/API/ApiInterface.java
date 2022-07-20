@@ -13,6 +13,7 @@ import com.example.faruqtraders.Response.ApiResponseModel;
 import com.example.faruqtraders.Response.BannerResponse;
 import com.example.faruqtraders.Response.CartResponseModel;
 import com.example.faruqtraders.Response.CategoryResponseModel;
+import com.example.faruqtraders.Response.DeleteResponse;
 import com.example.faruqtraders.Response.DeliveryMethodResponse;
 import com.example.faruqtraders.Response.EachProductResponse;
 import com.example.faruqtraders.Response.FilterResponseModel;
@@ -120,9 +121,15 @@ public interface ApiInterface {
             @Body AddToCartPostModel addToCartPostModel
     );
 
-    /*@DELETE("carts/{path}/delete"){
+    @DELETE("carts/{path}/delete")
+    Call<DeleteResponse> deleteAItem(
+            @Path("path") String product_id
+    );
 
-    }*/
+    @DELETE("carts/clear")
+    Call<DeleteResponse> ClearCart();
+
+
 
 
 

@@ -37,7 +37,7 @@ public class CheckoutNextActivity extends AppCompatActivity implements View.OnCl
     EditText nameEditText, emailEditText, numberEditText, addressEditText;
     AppCompatButton placeOrderButton;
 
-    String name, email;
+    String name, email, number, address, delivery_method;
     int deliveryChargeInsideDhaka;
     SessionManagement sessionManagement;
 
@@ -118,7 +118,15 @@ public class CheckoutNextActivity extends AppCompatActivity implements View.OnCl
 
     private void goForOrder() {
 
-        RetrofitClient.getRetrofitClient().placeOrder(nameEditText.getText().toString(), emailEditText.getText().toString(), numberEditText.getText().toString(), "Inside Dhaka", addressEditText.getText().toString()).enqueue(new Callback<OrderResponse>() {
+        name = nameEditText.getText().toString().trim();
+        email = emailEditText.getText().toString().trim();
+        number = numberEditText.getText().toString().trim();
+        address = addressEditText.getText().toString().trim();
+        delivery_method = "inside dhaka";
+
+        System.out.println("\n\n\n" + name + "\n\n\n" + email+ "\n\n\n" + number+ "\n\n\n" + address+ "\n\n\n" + delivery_method);
+
+        RetrofitClient.getRetrofitClient().placeOrder(name, email, number, delivery_method, address).enqueue(new Callback<OrderResponse>() {
             @Override
             public void onResponse(Call<OrderResponse> call, Response<OrderResponse> response) {
                 if (response.body() != null && response.code() == 200){

@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Uri person_picture;
 
     TextView errorTextView;
-    ProgressBar progressBar;
+    ProgressBar bannerProgressBar, progressBar, bestSellingProgressBar;
 
     String name, email, phone;
 
@@ -248,31 +248,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        /*bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-                int id = item.getItemId();
-
-                switch (id){
-                    case R.id.nav_home_bottom:
-                        Toast.makeText(MainActivity.this, "Home Bottom", Toast.LENGTH_SHORT).show();
-                        break;
-
-                    case R.id.nav_cart_bottom:
-                        startActivity(new Intent(getApplicationContext(), CartActivity.class));
-                        break;
-
-                    case R.id.nav_track_order_bottom:
-                        Toast.makeText(MainActivity.this, "My Order Bottom", Toast.LENGTH_SHORT).show();
-                        break;
-
-                    default:
-                        return true;
-                }
-                return true;
-            }
-        });*/
 
     }
 
@@ -284,8 +260,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void initialization() {
 
-        errorTextView = findViewById(R.id.errorTextView);
         progressBar = findViewById(R.id.progressBar);
+        bannerProgressBar = findViewById(R.id.bannerProgressBar);
+        bestSellingProgressBar = findViewById(R.id.bestSellingProgressBar);
+
+
+        errorTextView = findViewById(R.id.errorTextView);
 
         apiInterface = RetrofitClient.getRetrofitClient();
         progressDialog = new ProgressDialog(this);
@@ -368,6 +348,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void getBanner() {
 
+        bannerProgressBar.setVisibility(View.VISIBLE);
+
         layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         bannerRecyclerView.setLayoutManager(layoutManager);
 
@@ -375,6 +357,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onResponse(Call<BannerResponse> call, Response<BannerResponse> response) {
                 if (response.body() != null){
+                    bannerProgressBar.setVisibility(View.INVISIBLE);
                     bannerResponse = response.body();
                     bannerAdapter = new BannerAdapter(MainActivity.this, bannerResponse);
                     bannerRecyclerView.setAdapter(bannerAdapter);
@@ -498,12 +481,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     // best sell RecyclerView
     private void fetchBestSellingProduct() {
+
+        bestSellingProgressBar.setVisibility(View.VISIBLE);
+
         bestSellingRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
         apiInterface.getBestSelling().enqueue(new Callback<ApiResponseModel>() {
             @Override
             public void onResponse(Call<ApiResponseModel> call, Response<ApiResponseModel> response) {
                 if (response.body() != null){
+                    bestSellingProgressBar.setVisibility(View.INVISIBLE);
                     apiResponseData = response.body();
                     bestSellingAdapter = new BestSellingAdapter(MainActivity.this, apiResponseData);
                     bestSellingRecyclerView.setAdapter(bestSellingAdapter);
@@ -522,12 +509,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void fetchLatestProduct() {
 
+        progressBar.setVisibility(View.VISIBLE);
+
         latestProductRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
         apiInterface.getLatest().enqueue(new Callback<ApiResponseModel>() {
             @Override
             public void onResponse(Call<ApiResponseModel> call, Response<ApiResponseModel> response) {
                 if (response.body() != null){
+                    progressBar.setVisibility(View.INVISIBLE);
                     apiResponseData = response.body();
                     latestProductAdapter = new LatestProductAdapter(MainActivity.this, apiResponseData);
                     latestProductRecyclerView.setAdapter(latestProductAdapter);

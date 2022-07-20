@@ -28,14 +28,10 @@ import com.example.faruqtraders.Adapter.RelatedProductAdapter;
 import com.example.faruqtraders.R;
 import com.example.faruqtraders.Response.AddCartResponse;
 import com.example.faruqtraders.Response.AddToCartPostModel;
-import com.example.faruqtraders.Response.AddToCartResponse;
 import com.example.faruqtraders.Response.ApiResponseModel;
 import com.example.faruqtraders.Response.ProductDetailsResponseModel;
 import com.example.faruqtraders.Utility.NetworkChangeListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -55,31 +51,13 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
     AppCompatButton add_to_cart, add_to_favourite;
     AppCompatImageView imageBack;
 
-    List<AddToCartResponse.Data> data;
-
     ApiInterface apiInterface;
 
-    List<ProductDetailsResponseModel> productDetails1 = new ArrayList<>();
     ProductDetailsResponseModel productDetails;
 
-    ApiResponseModel apiResponseModel;
-
-    AddCartResponse addCartResponse;
-    AddToCartPostModel addToCartPostModel;
-
-
     int count = 1;
-    int quantity;
-    String product_id;
-
-    //LatestProductModel latestProductModel = null;
-
-    //BestSellingModel bestSellingModel = null;
-
-    //ApiResponseModel data = null;
 
     String name, main_price, discount_price, thumbnail, id, slug, category;
-    int position;
 
     TextView relatedProductMoreProduct;
 
@@ -89,16 +67,9 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
         setContentView(R.layout.activity_product_details);
 
         initialization();
-        //relateProduct();
         setListener();
-
-        //fetchRelatedProduct();
-
         received_product_details();
 
-        //setData();
-        //position = getIntent().getIntExtra("position", 0);
-        /*System.out.println("Product Name is "+ apiResponseData.products.data.get(position).name);*/
     }
 
     private void initialization() {
@@ -123,30 +94,6 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
         add_to_cart = findViewById(R.id.add_to_cart_button);
         add_to_favourite = findViewById(R.id.add_to_favourite_button);
 
-    }
-
-    private void fetchRelatedProduct() {
-
-        //category = getIntent().getStringExtra("slug");
-        System.out.println("Slug 1 ----- > " + category);
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        apiInterface.getRelatedProduct(category).enqueue(new Callback<ApiResponseModel>() {
-            @Override
-            public void onResponse(Call<ApiResponseModel> call, Response<ApiResponseModel> response) {
-
-                if (response.body() != null){
-                    apiResponseData = response.body();
-                    relatedProductAdapter = new RelatedProductAdapter(ProductDetailsActivity.this, apiResponseData);
-                    recyclerView.setAdapter(relatedProductAdapter);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ApiResponseModel> call, Throwable t) {
-
-            }
-        });
     }
 
     private void setListener(){

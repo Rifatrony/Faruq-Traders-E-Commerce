@@ -17,6 +17,7 @@ import com.example.faruqtraders.API.RetrofitClientWithHeader;
 import com.example.faruqtraders.R;
 import com.example.faruqtraders.RecyclerViewInterface.CartAdapterInterface;
 import com.example.faruqtraders.Response.CartResponseModel;
+import com.example.faruqtraders.Response.DeleteResponse;
 
 import java.util.ArrayList;
 
@@ -72,7 +73,21 @@ public class CartDetailsAdapter extends RecyclerView.Adapter<CartDetailsAdapter.
                     @Override
                     public void onClick(View view) {
 
-                        Toast.makeText(context, cartResponseModel.data.get(position).product.name, Toast.LENGTH_SHORT).show();
+                        RetrofitClientWithHeader.getRetrofitClient(context).deleteAItem(cartResponseModel.data.get(position).product.id).enqueue(new Callback<DeleteResponse>() {
+                            @SuppressLint("NotifyDataSetChanged")
+                            @Override
+                            public void onResponse(Call<DeleteResponse> call, Response<DeleteResponse> response) {
+                                if (response.isSuccessful()){
+                                    Toast.makeText(context, "One Item Deleted from cart", Toast.LENGTH_SHORT).show();
+                                    notifyDataSetChanged();
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<DeleteResponse> call, Throwable t) {
+
+                            }
+                        });
                     }
                 });
                 holder.increase_image_button.setOnClickListener(new View.OnClickListener() {
@@ -87,6 +102,7 @@ public class CartDetailsAdapter extends RecyclerView.Adapter<CartDetailsAdapter.
                                 if (response.body() != null && response.code() == 200){
 
                                     int qnty = Integer.parseInt(cartResponseModel.data.get(position).quantity) + 1;
+                                    holder.quantity.setText(qnty);
                                     Toast.makeText(context, "Quantity is " + qnty, Toast.LENGTH_SHORT).show();
 
                                 }

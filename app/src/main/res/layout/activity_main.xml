@@ -60,14 +60,34 @@
                         android:layout_height="match_parent"
                         >
 
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/bannerRecyclerView"
+                        <FrameLayout
+                            android:id="@+id/bannerCardView"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="230dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            />
+                            >
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/bannerRecyclerView"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+
+                                />
+
+                            <ProgressBar
+                                android:id="@+id/bannerProgressBar"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_gravity="center"
+                                android:visibility="gone"
+
+                                />
+
+                        </FrameLayout>
+
+
 
 
                         <TextView
@@ -88,7 +108,7 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.0"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/bannerRecyclerView"
+                            app:layout_constraintTop_toBottomOf="@id/bannerCardView"
                             app:drawableTint="@color/yellow" />
 
                         <LinearLayout
@@ -124,31 +144,22 @@
                         <FrameLayout
                             android:id="@+id/frameOne"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="220dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.0"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/latest_category"
                             >
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="vertical"
-                                android:gravity="center"
-                                >
-                                <androidx.recyclerview.widget.RecyclerView
-                                    android:id="@+id/latest_product_Recyclerview"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="8dp"
-                                    android:layout_marginTop="5dp"
-                                    android:layout_marginEnd="8dp"
-                                    android:layout_gravity="center"
-                                    />
-                            </LinearLayout>
-
-
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/latest_product_Recyclerview"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginEnd="8dp"
+                                android:layout_gravity="center"
+                                />
 
                             <ProgressBar
                                 android:layout_width="30dp"
@@ -186,10 +197,10 @@
                             app:layout_constraintTop_toBottomOf="@id/frameOne"
                             />
 
-                        <LinearLayout
+                        <FrameLayout
                             android:id="@+id/ll2"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="220dp"
                             android:gravity="center"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.0"
@@ -203,9 +214,18 @@
                                 android:layout_marginStart="8dp"
                                 android:layout_marginTop="5dp"
                                 android:layout_marginEnd="8dp"
+                                android:layout_gravity="center"
                                 />
 
-                        </LinearLayout>
+                            <ProgressBar
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:id="@+id/bestSellingProgressBar"
+                                android:visibility="gone"
+                                android:layout_gravity="center"
+                                />
+
+                        </FrameLayout>
 
                         <TextView
                             android:id="@+id/sell_product_category"

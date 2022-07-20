@@ -34,6 +34,7 @@ import com.example.faruqtraders.RecyclerViewInterface.CartAdapterInterface;
 import com.example.faruqtraders.Response.AddToCartPostModel;
 import com.example.faruqtraders.Response.ApiResponseModel;
 import com.example.faruqtraders.Response.CartResponseModel;
+import com.example.faruqtraders.Response.DeleteResponse;
 import com.example.faruqtraders.Session.SessionManagement;
 import com.example.faruqtraders.Utility.NetworkChangeListener;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -53,6 +54,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
     NetworkChangeListener networkChangeListener = new NetworkChangeListener();
 
     AppCompatImageView imageView;
+    TextView clearCartTextView;
 
     RecyclerView cartRecyclerView;
     TextView grand_total;
@@ -93,6 +95,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
 
         apiInterface = RetrofitClientWithHeader.getRetrofitClient(this);
 
+        clearCartTextView = findViewById(R.id.clearCartTextView);
         cartRecyclerView = findViewById(R.id.cartRecyclerView);
 
         cartRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -113,6 +116,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
 
     private void setListener(){
         imageView.setOnClickListener(this);
+        clearCartTextView.setOnClickListener(this);
         checkoutButton.setOnClickListener(this);
     }
 
@@ -145,9 +149,32 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.checkoutButton:
                 checkLogin();
                 break;
+
+            case R.id.clearCartTextView:
+                ClearCart();
+                break;
+
             default:
 
         }
+    }
+
+    private void ClearCart() {
+
+        RetrofitClientWithHeader.getRetrofitClient(this).ClearCart().enqueue(new Callback<DeleteResponse>() {
+            @Override
+            public void onResponse(Call<DeleteResponse> call, Response<DeleteResponse> response) {
+                if (response.isSuccessful()){
+                    showToast("Cart Clear");
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<DeleteResponse> call, Throwable t) {
+
+            }
+        });
     }
 
     private void fetchCartProduct() {

@@ -89,8 +89,6 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
         name = getIntent().getStringExtra("name");
         email = getIntent().getStringExtra("email");
 
-        System.out.println("Receive name is ====> " + name + "\n Receive email is =====> " + email);
-
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -151,7 +149,11 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onResponse(Call<DeliveryMethodResponse> call, Response<DeliveryMethodResponse> response) {
                 if (response.body() != null){
+
                     deliveryMethodResponse = response.body();
+
+                    Toast.makeText(CheckoutActivity.this, "Size is : " + deliveryMethodResponse.id, Toast.LENGTH_SHORT).show();
+
                     Toast.makeText(CheckoutActivity.this, deliveryMethodResponse.name, Toast.LENGTH_SHORT).show();
                     System.out.println("Response is ------>  "+ response.body());
                 }
