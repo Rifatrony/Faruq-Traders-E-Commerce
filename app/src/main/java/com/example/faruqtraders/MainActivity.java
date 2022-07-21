@@ -124,7 +124,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Uri person_picture;
 
     TextView errorTextView;
-    ProgressBar bannerProgressBar, progressBar, bestSellingProgressBar;
+    ProgressBar bannerProgressBar, progressBar, bestSellingProgressBar, sellProductProgressBar,
+            featureProductProgressBar, topInCategoriesProgressBar, peopleAreAlsoLookingForProgressBar;
 
     String name, email, phone;
 
@@ -263,6 +264,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         progressBar = findViewById(R.id.progressBar);
         bannerProgressBar = findViewById(R.id.bannerProgressBar);
         bestSellingProgressBar = findViewById(R.id.bestSellingProgressBar);
+        sellProductProgressBar = findViewById(R.id.sellProductProgressBar);
+        featureProductProgressBar = findViewById(R.id.featureProductProgressBar);
+        topInCategoriesProgressBar = findViewById(R.id.topInCategoriesProgressBar);
+        peopleAreAlsoLookingForProgressBar = findViewById(R.id.peopleAreAlsoLookingForProgressBar);
 
 
         errorTextView = findViewById(R.id.errorTextView);
@@ -390,6 +395,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void fetchPeopleAreLookingAlsoForProduct() {
 
+        peopleAreAlsoLookingForProgressBar.setVisibility(View.VISIBLE);
+
         peoplesAreAlsoLookingForRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
         apiInterface.getSuggestion().enqueue(new Callback<VisitedProductResponse>() {
@@ -399,7 +406,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //progressBar.setVisibility(View.VISIBLE);
 
                 if (response.body() != null){
-                    progressBar.setVisibility(View.GONE);
+                    peopleAreAlsoLookingForProgressBar.setVisibility(View.GONE);
                     visitedProductResponse = response.body();
                     peopleAreAlsoLookingForAdapter = new PeopleAreAlsoLookingForAdapter(MainActivity.this, visitedProductResponse);
                     peoplesAreAlsoLookingForRecyclerView.setAdapter(peopleAreAlsoLookingForAdapter);
@@ -416,6 +423,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void fetchTopInCategoriesProduct() {
 
+        topInCategoriesProgressBar.setVisibility(View.VISIBLE);
         topInCategoriesRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
 
@@ -424,6 +432,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onResponse(Call<ApiResponseModel> call, Response<ApiResponseModel> response) {
 
                 if (response.body() != null){
+                    topInCategoriesProgressBar.setVisibility(View.INVISIBLE);
                     apiResponseData = response.body();
                     topInCategoriesAdapter = new TopInCategoriesAdapter(MainActivity.this, apiResponseData);
                     topInCategoriesRecyclerView.setAdapter(topInCategoriesAdapter);
@@ -439,12 +448,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void fetchFeatureProduct() {
 
+        featureProductProgressBar.setVisibility(View.VISIBLE);
+
         featureRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
         apiInterface.getFeature().enqueue(new Callback<ApiResponseModel>() {
             @Override
             public void onResponse(Call<ApiResponseModel> call, Response<ApiResponseModel> response) {
                 if (response.body() != null){
+                    featureProductProgressBar.setVisibility(View.GONE);
                     apiResponseData = response.body();
                     featureAdapter = new FeatureAdapter(MainActivity.this, apiResponseData);
                     featureRecyclerView.setAdapter(featureAdapter);
@@ -460,12 +472,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void fetchSellProduct() {
+
+        sellProductProgressBar.setVisibility(View.VISIBLE);
+
+        sellProductProgressBar.setVisibility(View.VISIBLE);
         sellProductRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
         apiInterface.getSale().enqueue(new Callback<ApiResponseModel>() {
             @Override
             public void onResponse(Call<ApiResponseModel> call, Response<ApiResponseModel> response) {
                 if (response.body() != null){
+                    sellProductProgressBar.setVisibility(View.INVISIBLE);
+                    sellProductProgressBar.setVisibility(View.GONE);
                     apiResponseData = response.body();
                     sellProductAdapter = new SellProductAdapter(MainActivity.this, apiResponseData);
                     sellProductRecyclerView.setAdapter(sellProductAdapter);

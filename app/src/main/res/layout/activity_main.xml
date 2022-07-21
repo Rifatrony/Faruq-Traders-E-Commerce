@@ -61,7 +61,7 @@
                         >
 
                         <FrameLayout
-                            android:id="@+id/bannerCardView"
+                            android:id="@+id/frameLayout1"
                             android:layout_width="match_parent"
                             android:layout_height="230dp"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -76,19 +76,19 @@
 
                                 />
 
+
                             <ProgressBar
                                 android:id="@+id/bannerProgressBar"
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
-                                android:layout_gravity="center"
+                                style="?android:attr/progressBarStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
                                 android:visibility="gone"
-
+                                android:layout_gravity="center"
+                                android:indeterminateDrawable="@drawable/custome_progress_bar"
                                 />
 
                         </FrameLayout>
-
-
-
 
                         <TextView
                             android:id="@+id/all_category"
@@ -108,7 +108,7 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.0"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/bannerCardView"
+                            app:layout_constraintTop_toBottomOf="@id/frameLayout1"
                             app:drawableTint="@color/yellow" />
 
                         <LinearLayout
@@ -142,7 +142,7 @@
                         </LinearLayout>
 
                         <FrameLayout
-                            android:id="@+id/frameOne"
+                            android:id="@+id/frameLayout2"
                             android:layout_width="match_parent"
                             android:layout_height="220dp"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -162,11 +162,14 @@
                                 />
 
                             <ProgressBar
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
                                 android:id="@+id/progressBar"
-                                android:layout_gravity="center"
+                                style="?android:attr/progressBarStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
                                 android:visibility="gone"
+                                android:layout_gravity="center"
+                                android:indeterminateDrawable="@drawable/custome_progress_bar"
                                 />
 
                             <TextView
@@ -194,11 +197,11 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.0"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/frameOne"
+                            app:layout_constraintTop_toBottomOf="@id/frameLayout2"
                             />
 
                         <FrameLayout
-                            android:id="@+id/ll2"
+                            android:id="@+id/frameLayout3"
                             android:layout_width="match_parent"
                             android:layout_height="220dp"
                             android:gravity="center"
@@ -218,11 +221,14 @@
                                 />
 
                             <ProgressBar
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
                                 android:id="@+id/bestSellingProgressBar"
+                                style="?android:attr/progressBarStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
                                 android:visibility="gone"
                                 android:layout_gravity="center"
+                                android:indeterminateDrawable="@drawable/custome_progress_bar"
                                 />
 
                         </FrameLayout>
@@ -241,14 +247,16 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.0"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/ll2"
+                            app:layout_constraintTop_toBottomOf="@id/frameLayout3"
 
                             />
 
-                        <LinearLayout
-                            android:id="@+id/ll3"
+                        <!--Sell Product Layout-->
+
+                        <FrameLayout
+                            android:id="@+id/frameLayout4"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="220dp"
                             android:gravity="center"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.0"
@@ -263,32 +271,44 @@
                                 android:layout_marginStart="8dp"
                                 android:layout_marginTop="5dp"
                                 android:layout_marginEnd="8dp"
+                                android:layout_gravity="center"
                                 />
 
-                        </LinearLayout>
-
-                            <TextView
-                                android:id="@+id/feature_product_category"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:text="@string/feature_product"
-                                android:textStyle="bold"
-                                android:textSize="18sp"
-                                android:layout_margin="10dp"
-                                android:gravity="center_vertical"
-                                android:padding="10dp"
-                                android:textColor="@color/black"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintHorizontal_bias="0.0"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@id/ll3"
+                            <ProgressBar
+                                android:id="@+id/sellProductProgressBar"
+                                style="?android:attr/progressBarStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:visibility="gone"
+                                android:layout_gravity="center"
+                                android:indeterminateDrawable="@drawable/custome_progress_bar"
                                 />
 
-                        <LinearLayout
+
+                        </FrameLayout>
+
+                        <TextView
+                            android:id="@+id/feature_product_category"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/ll4"
-                            android:gravity="center"
+                            android:layout_height="match_parent"
+                            android:text="@string/feature_product"
+                            android:textStyle="bold"
+                            android:textSize="18sp"
+                            android:layout_margin="10dp"
+                            android:gravity="center_vertical"
+                            android:padding="10dp"
+                            android:textColor="@color/black"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/frameLayout4"
+                            />
+
+                        <FrameLayout
+                            android:id="@+id/frameLayout5"
+                            android:layout_width="match_parent"
+                            android:layout_height="220dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.5"
                             app:layout_constraintStart_toStartOf="parent"
@@ -302,12 +322,23 @@
                                 android:layout_marginStart="8dp"
                                 android:layout_marginTop="5dp"
                                 android:layout_marginEnd="8dp"
+                                android:layout_gravity="center"
                                 />
 
 
-                        </LinearLayout>
+                            <ProgressBar
+                                android:id="@+id/featureProductProgressBar"
+                                style="?android:attr/progressBarStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:visibility="gone"
+                                android:layout_gravity="center"
+                                android:indeterminateDrawable="@drawable/custome_progress_bar"
+                                />
 
 
+                        </FrameLayout>
 
                         <LinearLayout
                             android:id="@+id/top_categories"
@@ -322,7 +353,7 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.0"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/ll4"
+                            app:layout_constraintTop_toBottomOf="@id/frameLayout5"
                             >
                             <TextView
                                 android:layout_width="wrap_content"
@@ -350,19 +381,41 @@
 
                         </LinearLayout>
 
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/topCategoriesRecyclerView"
+                        <FrameLayout
+                            android:id="@+id/frameLayout6"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginEnd="16dp"
-                            android:layout_marginBottom="15dp"
+                            android:layout_height="245dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.5"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/top_categories"
-                            />
+                            >
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/topCategoriesRecyclerView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginEnd="8dp"
+                                android:layout_marginBottom="10dp"
+                                android:layout_gravity="center"
+                                />
+
+
+                            <ProgressBar
+                                android:id="@+id/topInCategoriesProgressBar"
+                                style="?android:attr/progressBarStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:visibility="gone"
+                                android:layout_gravity="center"
+                                android:indeterminateDrawable="@drawable/custome_progress_bar"
+                                />
+
+
+                        </FrameLayout>
 
                         <LinearLayout
                             android:id="@+id/peoplesAreAlsoLookingFor"
@@ -377,7 +430,7 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.0"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/topCategoriesRecyclerView"
+                            app:layout_constraintTop_toBottomOf="@id/frameLayout6"
                             >
                             <TextView
                                 android:layout_width="wrap_content"
@@ -405,47 +458,49 @@
 
                         </LinearLayout>
 
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/peoplesAreAlsoLookingForRecyclerView"
+                        <FrameLayout
+                            android:id="@+id/frameLayout7"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginEnd="16dp"
-                            android:layout_marginBottom="15dp"
+                            android:layout_height="220dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.5"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/peoplesAreAlsoLookingFor"
-                            />
 
+                            >
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/peoplesAreAlsoLookingForRecyclerView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginEnd="16dp"
+                                android:layout_gravity="center"
+                                />
+
+
+                            <ProgressBar
+                                android:id="@+id/peopleAreAlsoLookingForProgressBar"
+                                style="?android:attr/progressBarStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:visibility="gone"
+                                android:layout_gravity="center"
+                                android:indeterminateDrawable="@drawable/custome_progress_bar"
+                                />
+
+                        </FrameLayout>
 
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </ScrollView>
 
-
             </LinearLayout>
 
-            <!--<com.google.android.material.bottomnavigation.BottomNavigationView
-                android:id="@+id/bottom_nav"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:background="@drawable/bottom_nav_background"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:menu="@menu/bottom_nav"
-                app:itemIconSize="28dp"
-                app:itemTextColor="#01192C"
-                android:textAlignment="center"
-                />-->
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
-
 
     </RelativeLayout>
 

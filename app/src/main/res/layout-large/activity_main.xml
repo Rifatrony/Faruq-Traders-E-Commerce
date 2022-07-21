@@ -60,35 +60,36 @@
                         android:layout_height="match_parent"
                         >
 
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/bannerRecyclerView"
+                        <FrameLayout
+                            android:id="@+id/frameLayout1"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="230dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            />
+                            >
 
-                        <!--<EditText
-                            android:id="@+id/mainActivitySearch"
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginLeft="16dp"
-                            android:layout_marginRight="16dp"
-                            android:paddingLeft="16dp"
-                            android:paddingTop="12dp"
-                            android:paddingRight="18dp"
-                            android:paddingBottom="12dp"
-                            android:hint="@string/search_product"
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/bannerRecyclerView"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
 
-                            android:drawableEnd="@drawable/search"
-                            android:background="@drawable/search_background"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.0"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/viewPagerImageSlider"
-                            />-->
+                                />
+
+
+                            <ProgressBar
+                                android:id="@+id/bannerProgressBar"
+                                style="?android:attr/progressBarStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:visibility="gone"
+                                android:layout_gravity="center"
+                                android:indeterminateDrawable="@drawable/custome_progress_bar"
+                                />
+
+                        </FrameLayout>
+
 
                         <TextView
                             android:id="@+id/all_category"
@@ -108,7 +109,7 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.0"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/bannerRecyclerView"
+                            app:layout_constraintTop_toBottomOf="@id/frameLayout1"
                             app:drawableTint="@color/yellow" />
 
                         <LinearLayout
@@ -141,40 +142,34 @@
                         </LinearLayout>
 
                         <FrameLayout
-                            android:id="@+id/frameOne"
+                            android:id="@+id/frameLayout2"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="220dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.0"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/latest_category"
                             >
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="vertical"
-                                android:gravity="center"
-                                >
-                                <androidx.recyclerview.widget.RecyclerView
-                                    android:id="@+id/latest_product_Recyclerview"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="8dp"
-                                    android:layout_marginTop="5dp"
-                                    android:layout_marginEnd="8dp"
-                                    android:layout_gravity="center"
-                                    />
-                            </LinearLayout>
-
-
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/latest_product_Recyclerview"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginEnd="8dp"
+                                android:layout_gravity="center"
+                                />
 
                             <ProgressBar
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
                                 android:id="@+id/progressBar"
-                                android:layout_gravity="center"
+                                style="?android:attr/progressBarStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
                                 android:visibility="gone"
+                                android:layout_gravity="center"
+                                android:indeterminateDrawable="@drawable/custome_progress_bar"
                                 />
 
                             <TextView
@@ -186,166 +181,160 @@
 
                         </FrameLayout>
 
-
-
-                        <LinearLayout
-                            android:id="@+id/best_selling_category"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:layout_marginTop="15dp"
-                            android:layout_marginLeft="12dp"
-                            android:layout_marginRight="12dp"
-                            android:padding="3dp"
-                            android:background="@drawable/textview_background"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.0"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/frameOne"
-                            >
-                            <TextView
-                                android:id="@+id/best_selling_product"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:text="@string/best_selling"
-                                android:gravity="center_vertical"
-                                android:textStyle="bold"
-                                android:textSize="18sp"
-                                android:padding="7dp"
-                                android:textColor="@color/black"
-                                />
-                            <!--<TextView
-                                android:layout_width="fill_parent"
-                                android:layout_height="wrap_content"
-                                android:text="VIEW ALL"
-                                android:padding="10dp"
-                                android:gravity="center_vertical|end"
-                                android:textColor="@color/yellow"
-                                android:textStyle="bold"
-                                android:drawablePadding="10dp"
-                                android:drawableTint="@color/yellow"
-                                android:drawableRight="@drawable/arrow"
-                                />-->
-
-                        </LinearLayout>
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/bestSellingRecyclerview"
+                        <TextView
+                            android:id="@+id/best_selling_product"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginEnd="8dp"
+                            android:text="@string/best_selling"
+                            android:gravity="center_vertical"
+                            android:textStyle="bold"
+                            android:textSize="18sp"
+                            android:padding="7dp"
+                            android:layout_margin="10dp"
+                            android:paddingLeft="16dp"
+                            android:paddingRight="20dp"
+                            android:textColor="@color/black"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.0"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/best_selling_category"
+                            app:layout_constraintTop_toBottomOf="@id/frameLayout2"
                             />
 
-                        <LinearLayout
+                        <FrameLayout
+                            android:id="@+id/frameLayout3"
+                            android:layout_width="match_parent"
+                            android:layout_height="220dp"
+                            android:gravity="center"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/best_selling_product"
+                            >
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/bestSellingRecyclerview"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginEnd="8dp"
+                                android:layout_gravity="center"
+                                />
+
+                            <ProgressBar
+                                android:id="@+id/bestSellingProgressBar"
+                                style="?android:attr/progressBarStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:visibility="gone"
+                                android:layout_gravity="center"
+                                android:indeterminateDrawable="@drawable/custome_progress_bar"
+                                />
+
+                        </FrameLayout>
+
+                        <TextView
                             android:id="@+id/sell_product_category"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="15dp"
-                            android:orientation="horizontal"
-                            android:layout_marginStart="12dp"
-                            android:layout_marginEnd="12dp"
-                            android:padding="3dp"
-                            android:background="@drawable/textview_background"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.0"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/bestSellingRecyclerview"
-                            >
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:text="@string/sale_product"
-                                android:textStyle="bold"
-                                android:textSize="18sp"
-                                android:padding="7dp"
-                                android:gravity="center_vertical"
-                                android:textColor="@color/black"
-                                />
-                            <!--<TextView
-                                android:layout_width="fill_parent"
-                                android:layout_height="match_parent"
-                                android:text="VIEW ALL"
-                                android:padding="8dp"
-                                android:gravity="center_vertical|end"
-                                android:textColor="@color/yellow"
-                                android:textStyle="bold"
-                                android:drawablePadding="10dp"
-                                android:drawableTint="@color/yellow"
-                                android:drawableRight="@drawable/arrow"
-                                />-->
-
-                        </LinearLayout>
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/sellProductRecyclerview"
-                            android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginEnd="8dp"
+                            android:text="@string/sale_product"
+                            android:textStyle="bold"
+                            android:textSize="18sp"
+                            android:layout_margin="10dp"
+                            android:padding="10dp"
+                            android:gravity="center_vertical"
+                            android:textColor="@color/black"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.0"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/sell_product_category" />
+                            app:layout_constraintTop_toBottomOf="@id/frameLayout3"
 
-                        <LinearLayout
+                            />
+
+                        <FrameLayout
+                            android:id="@+id/frameLayout4"
+                            android:layout_width="match_parent"
+                            android:layout_height="220dp"
+                            android:gravity="center"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/sell_product_category"
+                            >
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/sellProductRecyclerview"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginEnd="8dp"
+                                android:layout_gravity="center"
+                                />
+
+                            <ProgressBar
+                                android:id="@+id/sellProductProgressBar"
+                                style="?android:attr/progressBarStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:visibility="gone"
+                                android:layout_gravity="center"
+                                android:indeterminateDrawable="@drawable/custome_progress_bar"
+                                />
+
+                        </FrameLayout>
+
+                        <TextView
                             android:id="@+id/feature_product_category"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="15dp"
-                            android:layout_marginLeft="12dp"
-                            android:layout_marginRight="12dp"
-                            android:padding="3dp"
-                            android:background="@drawable/textview_background"
-                            android:orientation="horizontal"
+                            android:layout_height="match_parent"
+                            android:text="@string/feature_product"
+                            android:textStyle="bold"
+                            android:textSize="18sp"
+                            android:layout_margin="10dp"
+                            android:gravity="center_vertical"
+                            android:padding="10dp"
+                            android:textColor="@color/black"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.0"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/sellProductRecyclerview"
-                            >
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:text="@string/feature_product"
-                                android:textStyle="bold"
-                                android:textSize="18sp"
-                                android:gravity="center_vertical"
-                                android:padding="7dp"
-                                android:textColor="@color/black"
-                                />
-                            <!--<TextView
-                                android:layout_width="fill_parent"
-                                android:layout_height="match_parent"
-                                android:text="VIEW ALL"
-                                android:padding="10dp"
-                                android:gravity="center_vertical|end"
-                                android:textColor="@color/yellow"
-                                android:textStyle="bold"
-                                android:drawablePadding="10dp"
-                                android:drawableTint="@color/yellow"
-                                android:drawableRight="@drawable/arrow"
-                                />-->
+                            app:layout_constraintTop_toBottomOf="@id/frameLayout4"
+                            />
 
-                        </LinearLayout>
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/featureRecyclerView"
+                        <FrameLayout
+                            android:id="@+id/frameLayout5"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginEnd="8dp"
+                            android:layout_height="220dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.5"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/feature_product_category" />
+                            app:layout_constraintTop_toBottomOf="@+id/feature_product_category"
+                            >
 
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/featureRecyclerView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginEnd="8dp"
+                                android:layout_gravity="center"
+                                />
+
+                            <ProgressBar
+                                android:id="@+id/featureProductProgressBar"
+                                style="?android:attr/progressBarStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:visibility="gone"
+                                android:layout_gravity="center"
+                                android:indeterminateDrawable="@drawable/custome_progress_bar"
+                                />
+
+
+                        </FrameLayout>
 
                         <LinearLayout
                             android:id="@+id/top_categories"
@@ -360,7 +349,7 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.0"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/featureRecyclerView"
+                            app:layout_constraintTop_toBottomOf="@id/frameLayout5"
                             >
                             <TextView
                                 android:layout_width="wrap_content"
@@ -388,19 +377,39 @@
 
                         </LinearLayout>
 
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/topCategoriesRecyclerView"
+                        <FrameLayout
+                            android:id="@+id/frameLayout6"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginEnd="16dp"
-                            android:layout_marginBottom="15dp"
+                            android:layout_height="300dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.5"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/top_categories"
-                            />
+                            >
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/topCategoriesRecyclerView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginEnd="8dp"
+                                android:layout_gravity="center"
+                                />
+
+                            <ProgressBar
+                                android:id="@+id/topInCategoriesProgressBar"
+                                style="?android:attr/progressBarStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:visibility="gone"
+                                android:layout_gravity="center"
+                                android:indeterminateDrawable="@drawable/custome_progress_bar"
+                                />
+
+
+                        </FrameLayout>
 
                         <LinearLayout
                             android:id="@+id/peoplesAreAlsoLookingFor"
@@ -415,7 +424,7 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.0"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/topCategoriesRecyclerView"
+                            app:layout_constraintTop_toBottomOf="@id/frameLayout6"
                             >
                             <TextView
                                 android:layout_width="wrap_content"
@@ -443,21 +452,39 @@
 
                         </LinearLayout>
 
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/peoplesAreAlsoLookingForRecyclerView"
+                        <FrameLayout
+                            android:id="@+id/frameLayout7"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginEnd="16dp"
-                            android:layout_marginBottom="15dp"
+                            android:layout_height="220dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.5"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/peoplesAreAlsoLookingFor"
-                            />
 
+                            >
 
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/peoplesAreAlsoLookingForRecyclerView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginEnd="16dp"
+                                android:layout_gravity="center"
+                                />
+
+                            <ProgressBar
+                                android:id="@+id/peopleAreAlsoLookingForProgressBar"
+                                style="?android:attr/progressBarStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:visibility="gone"
+                                android:layout_gravity="center"
+                                android:indeterminateDrawable="@drawable/custome_progress_bar"
+                                />
+
+                        </FrameLayout>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
