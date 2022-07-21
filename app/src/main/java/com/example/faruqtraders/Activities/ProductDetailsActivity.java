@@ -16,6 +16,7 @@ import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -60,6 +61,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
     String name, main_price, discount_price, thumbnail, id, slug, category;
 
     TextView relatedProductMoreProduct;
+    ProgressBar relatedProductProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +77,8 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
     private void initialization() {
 
         apiInterface = RetrofitClient.getRetrofitClient();
+
+        relatedProductProgressBar = findViewById(R.id.relatedProductProgressBar);
 
         product_name = findViewById(R.id.product_details_product_name);
         product_category = findViewById(R.id.product_details_product_category);
@@ -134,6 +138,9 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
                     quantityNumberTextView.setText(String.valueOf(count));
 
                     recyclerView.setLayoutManager(new LinearLayoutManager(ProductDetailsActivity.this, LinearLayoutManager.HORIZONTAL, false));
+
+                    relatedProductProgressBar.setVisibility(View.VISIBLE);
+
                     apiInterface.getRelatedProduct(category).enqueue(new Callback<ApiResponseModel>() {
                         @Override
                         public void onResponse(Call<ApiResponseModel> call, Response<ApiResponseModel> response) {
@@ -142,6 +149,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
                                 apiResponseData = response.body();
                                 relatedProductAdapter = new RelatedProductAdapter(ProductDetailsActivity.this, apiResponseData);
                                 recyclerView.setAdapter(relatedProductAdapter);
+                                relatedProductProgressBar.setVisibility(View.INVISIBLE);
                             }
                         }
 
