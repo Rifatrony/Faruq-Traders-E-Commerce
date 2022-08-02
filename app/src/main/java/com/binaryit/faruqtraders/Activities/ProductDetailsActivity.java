@@ -14,12 +14,15 @@ import android.content.IntentFilter;
 import android.graphics.Paint;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.binaryit.faruqtraders.Response.CartResponseModel;
 import com.bumptech.glide.Glide;
 import com.binaryit.faruqtraders.API.ApiInterface;
 import com.binaryit.faruqtraders.API.RetrofitClient;
@@ -53,6 +56,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
     AppCompatImageView imageBack;
 
     ApiInterface apiInterface;
+    ApiInterface apiInterface1;
 
     ProductDetailsResponseModel productDetails;
 
@@ -63,20 +67,53 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
     TextView relatedProductMoreProduct;
     ProgressBar relatedProductProgressBar;
 
+    TextView numberOfCartItemTextView;
+    CartResponseModel responseModel;
+    LinearLayout numberOfCartItem;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_details);
-
         initialization();
         setListener();
         received_product_details();
+
+        fetchCartProduct();
+
+    }
+
+    private void fetchCartProduct() {
+
+        apiInterface1.getCartDetails().enqueue(new Callback<CartResponseModel>() {
+            @Override
+            public void onResponse(Call<CartResponseModel> call, Response<CartResponseModel> response) {
+
+                if (response.body() != null) {
+
+                    responseModel = response.body();
+                    System.out.println("List size: "+responseModel.data.size());
+                    //setAdapter(responseModel);
+                    numberOfCartItemTextView.setText(String.valueOf(responseModel.data.size()));
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CartResponseModel> call, Throwable t) {
+
+            }
+        });
 
     }
 
     private void initialization() {
 
         apiInterface = RetrofitClient.getRetrofitClient();
+        apiInterface1 = RetrofitClientWithHeader.getRetrofitClient(this);
+
+        numberOfCartItem = findViewById(R.id.numberOfCartItem);
+        numberOfCartItemTextView = findViewById(R.id.numberOfCartItemTextView);
 
         relatedProductProgressBar = findViewById(R.id.relatedProductProgressBar);
 
@@ -100,6 +137,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
     }
 
     private void setListener(){
+        numberOfCartItem.setOnClickListener(this);
         add_button.setOnClickListener(this);
         minus_button.setOnClickListener(this);
         add_to_cart.setOnClickListener(this);
@@ -173,6 +211,10 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
     @Override
     public void onClick(View view) {
         switch (view.getId()){
+
+            case R.id.numberOfCartItem:
+                startActivity(new Intent(getApplicationContext(), CartActivity.class));
+                break;
 
             case R.id.imageBackId:
                 onBackPressed();
@@ -266,4 +308,9 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
         super.onStop();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.cart_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 }
