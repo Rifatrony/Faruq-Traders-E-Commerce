@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.binaryit.faruqtraders.API.RetrofitClient;
+import com.binaryit.faruqtraders.API.RetrofitClientWithHeader;
 import com.binaryit.faruqtraders.MainActivity;
 import com.binaryit.faruqtraders.Model.SessionDataModel;
 import com.binaryit.faruqtraders.R;
@@ -113,11 +114,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
 
             case R.id.facebookLogin:
-                showToast("Facebook Login");
+                //showToast("Facebook Login");
                 break;
 
             case R.id.googleLogin:
-                googleLogin();
+                //googleLogin();
                 break;
         }
     }
@@ -181,7 +182,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         progressBar.setVisibility(View.VISIBLE);
 
 
-        RetrofitClient.getRetrofitClient().userLogin(phone, password, "redmi").enqueue(new Callback<UserRegisterResponse>() {
+        RetrofitClientWithHeader.getRetrofitClient(this).userLogin(phone, password, "redmi").enqueue(new Callback<UserRegisterResponse>() {
             @Override
             public void onResponse(Call<UserRegisterResponse> call, Response<UserRegisterResponse> response) {
                 if (response.body() != null){

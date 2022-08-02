@@ -54,8 +54,8 @@
                 android:id="@+id/linear_layout1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="50dp"
                 android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -78,35 +78,32 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
                             app:cardBackgroundColor="@color/white"
-                            app:cardElevation="4dp"
                             app:cardCornerRadius="10dp"
-                            >
+                            app:cardElevation="4dp">
 
                             <ImageView
-                                android:layout_margin="10dp"
                                 android:id="@+id/imageView"
                                 android:layout_width="match_parent"
                                 android:layout_height="210dp"
+                                android:layout_margin="10dp"
                                 android:gravity="center"
-                                android:textSize="33sp"
-                                />
+                                android:textSize="33sp" />
 
                         </androidx.cardview.widget.CardView>
-
 
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
                             android:layout_marginTop="10dp"
+                            android:layout_marginRight="10dp"
                             android:paddingLeft="10dp"
-                            android:paddingRight="10dp"
                             android:paddingTop="10dp"
                             android:paddingEnd="10dp"
+                            android:paddingRight="10dp"
                             android:text="@string/product_name"
                             android:textColor="@color/black"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginRight="10dp"
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
@@ -114,21 +111,21 @@
                             android:id="@+id/product_details_product_name"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="15sp"
                             android:layout_marginLeft="10dp"
-                            android:layout_marginRight="10dp"
                             android:layout_marginTop="8dp"
+                            android:layout_marginRight="10dp"
                             android:paddingLeft="10dp"
                             android:paddingRight="10dp"
                             android:paddingBottom="10dp"
                             android:textColor="@color/yellow"
+                            android:textSize="15sp"
                             android:textStyle="bold" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="70dp"
-                            android:layout_marginTop="10dp"
                             android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
                             android:layout_marginRight="10dp"
                             android:orientation="horizontal">
 
@@ -137,7 +134,7 @@
                                 android:layout_width="60dp"
                                 android:layout_height="match_parent"
                                 android:layout_margin="10dp"
-                                />
+                                android:scaleType="fitXY" />
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -172,11 +169,11 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
                             android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
                             android:layout_marginRight="10dp"
-                            android:orientation="horizontal"
-                            >
+                            android:orientation="horizontal">
+
                             <TextView
                                 android:id="@+id/product_details_product_dicount_price"
                                 android:layout_width="match_parent"
@@ -185,8 +182,8 @@
                                 android:padding="10dp"
                                 android:textColor="@color/black"
                                 android:textSize="22sp"
-                                android:textStyle="bold"
-                                />
+                                android:textStyle="bold" />
+
                             <TextView
                                 android:id="@+id/product_details_product_main_price"
                                 android:layout_width="match_parent"
@@ -194,81 +191,79 @@
                                 android:layout_weight="1"
                                 android:padding="10dp"
                                 android:textColor="@color/main_price_text_color"
-                                android:textSize="22sp"
-                                />
+                                android:textSize="22sp" />
 
                         </LinearLayout>
 
 
-
                         <!--Quantity-->
 
-                        <androidx.constraintlayout.widget.ConstraintLayout
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="62dp"
-                            android:layout_marginTop="10dp"
                             android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
                             android:layout_marginRight="10dp"
+                            android:orientation="horizontal"
                             android:paddingLeft="10dp"
-                            android:paddingRight="10dp"
                             android:paddingTop="3dp"
-                            android:paddingBottom="3dp"
-                            >
+                            android:paddingRight="10dp"
+                            android:paddingBottom="3dp">
 
                             <TextView
                                 android:id="@+id/quantity_textview"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
+                                android:gravity="center"
                                 android:text="@string/quantity"
+                                android:textColor="@color/black"
                                 android:textSize="18sp"
-                                android:textColor="@color/black"
-                                android:gravity="center"
                                 android:textStyle="bold"
+                                app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                />
-
-                            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                                android:id="@+id/add_button"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="50dp"
-                                android:backgroundTint="#E6EEF1"
-                                android:src="@drawable/plus"
-                                app:borderWidth="0dp"
-                                app:elevation="0dp"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintStart_toEndOf="@+id/quantity_textview"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintVertical_bias="0.214" />
-
-                            <TextView
-                                android:id="@+id/quantityNumberTextView"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_marginStart="20dp"
-                                android:textSize="20sp"
-                                android:textStyle="bold"
-                                android:textColor="@color/black"
-                                android:gravity="center"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintStart_toEndOf="@+id/add_button"
                                 app:layout_constraintTop_toTopOf="parent" />
 
                             <com.google.android.material.floatingactionbutton.FloatingActionButton
                                 android:id="@+id/minus_button"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="20dp"
+                                android:layout_marginStart="10dp"
                                 android:backgroundTint="#E6EEF1"
                                 android:src="@drawable/remove"
                                 app:borderWidth="0dp"
-                                app:elevation="0dp"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintStart_toEndOf="@+id/quantityNumberTextView"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintVertical_bias="0.0" />
+                                app:elevation="0dp" />
+
+                            <TextView
+                                android:id="@+id/quantityNumberTextView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="16dp"
+                                android:gravity="center"
+                                android:textColor="@color/black"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                                android:id="@+id/add_button"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:backgroundTint="#E6EEF1"
+                                android:src="@drawable/plus"
+                                app:borderWidth="0dp"
+                                app:elevation="0dp" />
+
+                            <androidx.appcompat.widget.AppCompatButton
+                                android:id="@+id/add_to_cart_button"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="10dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/add_to_cart_button"
+                                android:gravity="center"
+                                android:padding="8dp"
+                                android:text="@string/add_to_cart"
+                                android:textColor="@color/white" />
 
                             <!--<TextView
                                 android:id="@+id/textView"
@@ -314,15 +309,15 @@
                                 app:layout_constraintVertical_bias="0.0"
                                 />-->
 
-                        </androidx.constraintlayout.widget.ConstraintLayout>
+                        </LinearLayout>
 
                         <LinearLayout
                             android:id="@+id/product_details_related_product_layout"
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
                             android:layout_marginLeft="10dp"
-                            android:layout_marginRight="10dp"
-                            android:layout_marginTop="10dp">
+                            android:layout_marginTop="10dp"
+                            android:layout_marginRight="10dp">
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -341,8 +336,8 @@
                                 android:drawableEnd="@drawable/arrow"
                                 android:drawablePadding="8dp"
                                 android:gravity="center_vertical|end"
-                                android:paddingEnd="5dp"
                                 android:paddingStart="5dp"
+                                android:paddingEnd="5dp"
                                 android:text="@string/more_products"
                                 android:textColor="@color/black"
                                 android:textSize="15sp"
@@ -359,64 +354,24 @@
                                 android:id="@+id/product_details_related_product_recyclerView"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:layout_margin="10dp"
-                                />
+                                android:layout_margin="10dp" />
 
                             <ProgressBar
                                 android:id="@+id/relatedProductProgressBar"
                                 style="?android:attr/progressBarStyle"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
-                                android:visibility="gone"
                                 android:layout_gravity="center"
-                                android:indeterminateDrawable="@drawable/custome_progress_bar"
-                                />
+                                android:layout_marginTop="10dp"
+                                android:indeterminateDrawable="@drawable/custom_progress_bar"
+                                android:visibility="gone" />
 
                         </FrameLayout>
-
 
 
                     </LinearLayout>
 
                 </ScrollView>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/layout"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:orientation="horizontal"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/add_to_cart_button"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@drawable/add_to_cart_button"
-                    android:drawableStart="@drawable/cart1"
-                    android:drawableTint="@color/white"
-                    android:paddingLeft="15dp"
-                    android:text="@string/add_to_cart"
-                    android:textColor="@color/white" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/add_to_favourite_button"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="start"
-                    android:layout_weight="1"
-                    android:background="@drawable/add_to_favourite_button"
-                    android:drawableStart="@drawable/favorite"
-                    android:drawableTint="@color/white"
-                    android:paddingLeft="10dp"
-                    android:text="@string/add_to_favourite"
-                    android:textColor="@color/white"
-                    />
 
             </LinearLayout>
 

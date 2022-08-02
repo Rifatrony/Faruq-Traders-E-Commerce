@@ -186,6 +186,14 @@
 
                     </LinearLayout>
 
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:id="@+id/deliveryTypeRecyclerView"
+                        />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -197,7 +205,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:text="Total"
+                            android:text="Grand Total"
                             android:textSize="28sp"
                             android:textColor="@color/black"
                             android:textStyle="bold"

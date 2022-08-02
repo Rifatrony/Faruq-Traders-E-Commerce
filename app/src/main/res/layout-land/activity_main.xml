@@ -84,7 +84,7 @@
                                 android:layout_marginTop="10dp"
                                 android:visibility="gone"
                                 android:layout_gravity="center"
-                                android:indeterminateDrawable="@drawable/custome_progress_bar"
+                                android:indeterminateDrawable="@drawable/custom_progress_bar"
                                 />
 
                         </FrameLayout>
@@ -168,7 +168,7 @@
                                 android:layout_marginTop="10dp"
                                 android:visibility="gone"
                                 android:layout_gravity="center"
-                                android:indeterminateDrawable="@drawable/custome_progress_bar"
+                                android:indeterminateDrawable="@drawable/custom_progress_bar"
                                 />
 
                             <TextView
@@ -227,7 +227,7 @@
                                 android:layout_marginTop="10dp"
                                 android:visibility="gone"
                                 android:layout_gravity="center"
-                                android:indeterminateDrawable="@drawable/custome_progress_bar"
+                                android:indeterminateDrawable="@drawable/custom_progress_bar"
                                 />
 
                         </FrameLayout>
@@ -279,7 +279,7 @@
                                 android:layout_marginTop="10dp"
                                 android:visibility="gone"
                                 android:layout_gravity="center"
-                                android:indeterminateDrawable="@drawable/custome_progress_bar"
+                                android:indeterminateDrawable="@drawable/custom_progress_bar"
                                 />
 
                         </FrameLayout>
@@ -329,7 +329,7 @@
                                 android:layout_marginTop="10dp"
                                 android:visibility="gone"
                                 android:layout_gravity="center"
-                                android:indeterminateDrawable="@drawable/custome_progress_bar"
+                                android:indeterminateDrawable="@drawable/custom_progress_bar"
                                 />
 
 
@@ -404,7 +404,7 @@
                                 android:layout_marginTop="10dp"
                                 android:visibility="gone"
                                 android:layout_gravity="center"
-                                android:indeterminateDrawable="@drawable/custome_progress_bar"
+                                android:indeterminateDrawable="@drawable/custom_progress_bar"
                                 />
 
 
@@ -480,7 +480,7 @@
                                 android:layout_marginTop="10dp"
                                 android:visibility="gone"
                                 android:layout_gravity="center"
-                                android:indeterminateDrawable="@drawable/custome_progress_bar"
+                                android:indeterminateDrawable="@drawable/custom_progress_bar"
                                 />
                         </FrameLayout>
 

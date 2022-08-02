@@ -96,7 +96,6 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
         add_button = findViewById(R.id.add_button);
         minus_button = findViewById(R.id.minus_button);
         add_to_cart = findViewById(R.id.add_to_cart_button);
-        add_to_favourite = findViewById(R.id.add_to_favourite_button);
 
     }
 
@@ -104,7 +103,6 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
         add_button.setOnClickListener(this);
         minus_button.setOnClickListener(this);
         add_to_cart.setOnClickListener(this);
-        add_to_favourite.setOnClickListener(this);
         imageBack.setOnClickListener(this);
         relatedProductMoreProduct.setOnClickListener(this);
     }
@@ -190,9 +188,6 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
 
             case R.id.add_to_cart_button:
                 addToCart();
-                break;
-
-            case R.id.add_to_favourite_button:
                 break;
 
             case R.id.relatedProductMoreProduct:

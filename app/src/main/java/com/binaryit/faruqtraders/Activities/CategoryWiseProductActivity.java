@@ -92,8 +92,12 @@ public class CategoryWiseProductActivity extends AppCompatActivity implements Vi
         if (isPaginationAllowed){
             nestedScrollView.setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
                 if (scrollY==v.getChildAt(0).getMeasuredHeight()-v.getMeasuredHeight()){
-                    page = page + 1;
-                    fetchCategories(page);
+                    try {
+                        page = page + 1;
+                        fetchCategories(page);
+                    }catch (Exception e){
+
+                    }
                 }
             });
         }
@@ -132,7 +136,7 @@ public class CategoryWiseProductActivity extends AppCompatActivity implements Vi
         name = getIntent().getStringExtra("name");
         icon = getIntent().getStringExtra("icon");
 
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        recyclerView.setLayoutManager(new GridLayoutManager(CategoryWiseProductActivity.this, 2));
         apiInterface.getCategoryWiseProduct(slug, page).enqueue(new Callback<ApiResponseModel>() {
 
             @SuppressLint("NotifyDataSetChanged")
@@ -142,15 +146,19 @@ public class CategoryWiseProductActivity extends AppCompatActivity implements Vi
                 if (response.body() != null){
 
                     progressDialog.dismiss();
-                    apiResponseModel = response.body();
+                   try {
+                       apiResponseModel = response.body();
+                       System.out.println("current page is ----- >" + apiResponseModel.products.pagination.current_page);
+                       detailsAdapter = new CategoryDetailsAdapter(CategoryWiseProductActivity.this, apiResponseModel);
+                       recyclerView.setAdapter(detailsAdapter);
+                       detailsAdapter.notifyDataSetChanged();
+                   }
+                   catch (Exception e){
 
-                    System.out.println("current page is ----- >" + apiResponseModel.products.pagination.current_page);
-
-                    detailsAdapter = new CategoryDetailsAdapter(CategoryWiseProductActivity.this, apiResponseModel);
-                    recyclerView.setAdapter(detailsAdapter);
-                    detailsAdapter.notifyDataSetChanged();
-
+                   }
                 }
+
+
                 else {
                     progressDialog.dismiss();
                     Toast.makeText(CategoryWiseProductActivity.this, response.errorBody().toString(), Toast.LENGTH_SHORT).show();

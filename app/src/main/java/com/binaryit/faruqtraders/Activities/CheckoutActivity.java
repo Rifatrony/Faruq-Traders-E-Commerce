@@ -16,6 +16,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.binaryit.faruqtraders.API.ApiInterface;
 import com.binaryit.faruqtraders.API.RetrofitClient;
 import com.binaryit.faruqtraders.API.RetrofitClientForDelivery;
 import com.binaryit.faruqtraders.Adapter.DeliveryMethodAdapter;
@@ -40,8 +41,6 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
     TextView nextTextView;
     TextView subtotalAmount, grandTotalTextView;
 
-
-
     RadioGroup radioGroup;
     RadioButton radioButton;
 
@@ -51,7 +50,9 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
 
     RecyclerView deliveryTypeRecyclerView;
     DeliveryMethodAdapter adapter;
-    List<DeliveryMethodResponse> deliveryMethodResponseList = new ArrayList<>();
+    List<DeliveryMethodResponse> deliveryMethodResponseList;
+
+    ApiInterface apiInterface;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,17 +72,23 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
 
         deliveryTypeRecyclerView = findViewById(R.id.deliveryTypeRecyclerView);
         deliveryTypeRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new DeliveryMethodAdapter(this, deliveryMethodResponseList);
+        deliveryTypeRecyclerView.setHasFixedSize(true);
+        deliveryMethodResponseList = new ArrayList<>();
+
+        adapter = new DeliveryMethodAdapter(CheckoutActivity.this, deliveryMethodResponseList);
         deliveryTypeRecyclerView.setAdapter(adapter);
 
-        RetrofitClientForDelivery.getRetrofitClient().getDeliveryCharge().enqueue(new Callback<List<DeliveryMethodResponse>>() {
+        apiInterface.getDeliveryCharge().enqueue(new Callback<List<DeliveryMethodResponse>>() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onResponse(Call<List<DeliveryMethodResponse>> call, Response<List<DeliveryMethodResponse>> response) {
-                if (response.body() != null){
+                if (response.body() != null && response.isSuccessful()){
+                    //deliveryMethodResponseList = response.body();
                     deliveryMethodResponseList.addAll(response.body());
-                    adapter.notifyDataSetChanged();
-                    System.out.println("List Size is " + deliveryMethodResponseList.size());
+                    /*adapter = new DeliveryMethodAdapter(CheckoutActivity.this, deliveryMethodResponseList);
+                    deliveryTypeRecyclerView.setAdapter(adapter);*/
+                    System.out.println("List size "+ deliveryMethodResponseList.size());
+
                 }
                 else {
                     System.out.println("Else : " + response.errorBody().toString());
@@ -90,7 +97,7 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
 
             @Override
             public void onFailure(Call<List<DeliveryMethodResponse>> call, Throwable t) {
-                System.out.println("Failure t : " + t.getMessage().toString());
+                System.out.println("Failure : " + t.getMessage().toString());
             }
         });
 
@@ -99,6 +106,8 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
 
 
     private void initialization(){
+
+        apiInterface = RetrofitClientForDelivery.getRetrofitClient();
 
         imageView = findViewById(R.id.imageBack);
 
@@ -176,21 +185,6 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     }
 
-    private void fetchDeliveryMethod() {
-        RetrofitClient.getRetrofitClient().getDeliveryCharge().enqueue(new Callback<List<DeliveryMethodResponse>>() {
-            @Override
-            public void onResponse(Call<List<DeliveryMethodResponse>> call, Response<List<DeliveryMethodResponse>> response) {
-                if (response.body() != null){
-                    //deliveryMethodResponse = response.body();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<DeliveryMethodResponse>> call, Throwable t) {
-
-            }
-        });
-    }
 
     @Override
     protected void onStart() {

@@ -125,7 +125,7 @@ public class CheckoutNextActivity extends AppCompatActivity implements View.OnCl
         RetrofitClient.getRetrofitClient().placeOrder(name, email, number, delivery_method, address).enqueue(new Callback<OrderResponse>() {
             @Override
             public void onResponse(Call<OrderResponse> call, Response<OrderResponse> response) {
-                if (response.isSuccessful()){
+                if (response.body()!= null && response.isSuccessful()){
                     Intent intent = new Intent(getApplicationContext(), OrderActivity.class);
                     startActivity(intent);
                     Toast.makeText(CheckoutNextActivity.this, "Order Successful", Toast.LENGTH_SHORT).show();

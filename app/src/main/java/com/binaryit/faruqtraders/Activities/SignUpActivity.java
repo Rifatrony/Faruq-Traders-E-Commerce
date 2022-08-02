@@ -128,7 +128,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         }
         else {
             callApi(name, email, number, password, confirmPassword,"" );
-            showToast("call Api");
         }
     }
 
