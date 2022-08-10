@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.binaryit.faruqtraders.API.RetrofitClient;
+import com.binaryit.faruqtraders.Response.RegistrationResponse;
 import com.binaryit.faruqtraders.Response.UserRegisterResponse;
 import com.binaryit.faruqtraders.R;
 import com.binaryit.faruqtraders.Utility.NetworkChangeListener;
@@ -113,8 +114,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             showToast("Enter Password");
             return;
         }
-        else if (password.length() < 6){
-            showToast("Minimum Password is 6 ");
+        else if (password.length() < 8){
+            showToast("Minimum Password is 8 ");
             return;
         }
 
@@ -136,17 +137,17 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         signUpButton.setVisibility(View.INVISIBLE);
         progressBar.setVisibility(View.VISIBLE);
 
-        RetrofitClient.getRetrofitClient().createUser(name, email, phone, password, confirmPassword, device_name).enqueue(new Callback<UserRegisterResponse>() {
+         RetrofitClient.getRetrofitClient().sendUserData(name, email, phone, password, confirmPassword, device_name, "").enqueue(new Callback<RegistrationResponse>() {
 
             @Override
-            public void onResponse(Call<UserRegisterResponse> call, Response<UserRegisterResponse> response) {
+            public void onResponse(Call<RegistrationResponse> call, Response<RegistrationResponse> response) {
 
                 if (response.isSuccessful()){
 
                     signUpButton.setVisibility(View.VISIBLE);
                     progressBar.setVisibility(View.INVISIBLE);
 
-                    showToast("Account Created Successfully...");
+                    showToast("OTP send to your phone");
 
                     fullNameEditText.setText("");
                     emailEditText.setText("");
@@ -154,8 +155,13 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     passwordEditText.setText("");
                     confirmPasswordEditText.setText("");
 
-                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-
+                    Intent intent = new Intent(getApplicationContext(), OtpActivity.class);
+                    intent.putExtra("name", name);
+                    intent.putExtra("email", email);
+                    intent.putExtra("phone", phone);
+                    intent.putExtra("password", password);
+                    intent.putExtra("confirmPassword", confirmPassword);
+                    intent.putExtra("device_name", device_name);
                     startActivity(intent);
 
                 }
@@ -168,7 +174,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             }
 
             @Override
-            public void onFailure(Call<UserRegisterResponse> call, Throwable t) {
+            public void onFailure(Call<RegistrationResponse> call, Throwable t) {
                 signUpButton.setVisibility(View.VISIBLE);
                 progressBar.setVisibility(View.INVISIBLE);
                 showToast("Failure ....."+t.getLocalizedMessage());

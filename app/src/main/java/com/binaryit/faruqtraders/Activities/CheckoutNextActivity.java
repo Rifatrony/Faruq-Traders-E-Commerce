@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.binaryit.faruqtraders.API.RetrofitClient;
+import com.binaryit.faruqtraders.API.RetrofitClientForDelivery;
 import com.binaryit.faruqtraders.API.RetrofitClientWithHeader;
 import com.binaryit.faruqtraders.R;
 import com.binaryit.faruqtraders.Response.OrderResponse;
@@ -122,7 +123,7 @@ public class CheckoutNextActivity extends AppCompatActivity implements View.OnCl
 
         System.out.println("\n\n\n" + name + "\n\n\n" + email+ "\n\n\n" + number+ "\n\n\n" + address+ "\n\n\n" + delivery_method);
 
-        RetrofitClient.getRetrofitClient().placeOrder(name, email, number, delivery_method, address).enqueue(new Callback<OrderResponse>() {
+        RetrofitClientForDelivery.getRetrofitClient().placeOrder(name, email, number, delivery_method, address).enqueue(new Callback<OrderResponse>() {
             @Override
             public void onResponse(Call<OrderResponse> call, Response<OrderResponse> response) {
                 if (response.body()!= null && response.isSuccessful()){
@@ -137,7 +138,7 @@ public class CheckoutNextActivity extends AppCompatActivity implements View.OnCl
 
             @Override
             public void onFailure(Call<OrderResponse> call, Throwable t) {
-                Toast.makeText(CheckoutNextActivity.this, "Failure" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(CheckoutNextActivity.this, "Failure " + t.getMessage(), Toast.LENGTH_SHORT).show();
                 System.out.println("\n\n\n " + t.getMessage());
             }
         });

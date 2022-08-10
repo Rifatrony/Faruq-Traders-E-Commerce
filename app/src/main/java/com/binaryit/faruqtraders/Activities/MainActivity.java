@@ -1,4 +1,4 @@
-package com.binaryit.faruqtraders;
+package com.binaryit.faruqtraders.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,18 +26,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.binaryit.faruqtraders.R;
 import com.bumptech.glide.Glide;
 import com.binaryit.faruqtraders.API.ApiInterface;
 import com.binaryit.faruqtraders.API.RetrofitClient;
 import com.binaryit.faruqtraders.API.RetrofitClientWithHeader;
-import com.binaryit.faruqtraders.Activities.AllCategoryActivity;
-import com.binaryit.faruqtraders.Activities.CartActivity;
-import com.binaryit.faruqtraders.Activities.ContactUsActivity;
-import com.binaryit.faruqtraders.Activities.DashboardActivity;
-import com.binaryit.faruqtraders.Activities.LoginActivity;
-import com.binaryit.faruqtraders.Activities.OrderActivity;
-import com.binaryit.faruqtraders.Activities.TopCategoryActivity;
-import com.binaryit.faruqtraders.Activities.WishlistActivity;
 import com.binaryit.faruqtraders.Adapter.BannerAdapter;
 import com.binaryit.faruqtraders.Adapter.BestSellingAdapter;
 import com.binaryit.faruqtraders.Adapter.FeatureAdapter;
@@ -376,7 +369,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 layoutManager.smoothScrollToPosition(bannerRecyclerView, new RecyclerView.State(), 0);
                             }
                         }
-                    },0, 3000);
+                    },0, 10000);
 
 
                 }

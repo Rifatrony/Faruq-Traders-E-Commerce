@@ -17,7 +17,6 @@ import android.widget.Toast;
 
 import com.binaryit.faruqtraders.API.RetrofitClient;
 import com.binaryit.faruqtraders.API.RetrofitClientWithHeader;
-import com.binaryit.faruqtraders.MainActivity;
 import com.binaryit.faruqtraders.Model.SessionDataModel;
 import com.binaryit.faruqtraders.R;
 import com.binaryit.faruqtraders.Response.LoginResponse;
@@ -163,8 +162,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             showToast("Enter Password");
             return;
 
-        } else if (loginPassword.length() < 6) {
-            showToast("Minimum Password is 6");
+        } else if (loginPassword.length() < 8) {
+            showToast("Minimum Password is 8");
             return;
         } else {
             //login();
@@ -182,7 +181,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         progressBar.setVisibility(View.VISIBLE);
 
 
-        RetrofitClientWithHeader.getRetrofitClient(this).userLogin(phone, password, "redmi").enqueue(new Callback<UserRegisterResponse>() {
+        RetrofitClient.getRetrofitClient().userLogin(phone, password, "redmi").enqueue(new Callback<UserRegisterResponse>() {
             @Override
             public void onResponse(Call<UserRegisterResponse> call, Response<UserRegisterResponse> response) {
                 if (response.body() != null){

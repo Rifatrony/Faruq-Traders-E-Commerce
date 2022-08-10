@@ -142,6 +142,7 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
 
             case R.id.nextTextView:
                 sendUserDetails();
+                break;
         }
     }
 

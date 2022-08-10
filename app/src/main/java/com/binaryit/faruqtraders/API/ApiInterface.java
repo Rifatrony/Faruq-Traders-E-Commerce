@@ -11,6 +11,7 @@ import com.binaryit.faruqtraders.Response.DeliveryMethodResponse;
 import com.binaryit.faruqtraders.Response.OrderDetailsResponse;
 import com.binaryit.faruqtraders.Response.OrderResponse;
 import com.binaryit.faruqtraders.Response.ProductDetailsResponseModel;
+import com.binaryit.faruqtraders.Response.RegistrationResponse;
 import com.binaryit.faruqtraders.Response.UserDetailsResponse;
 import com.binaryit.faruqtraders.Response.UserRegisterResponse;
 import com.binaryit.faruqtraders.Response.VisitedProductResponse;
@@ -38,8 +39,21 @@ public interface ApiInterface {
             @Field("phone") String phone,
             @Field("password") String password,
             @Field("password_confirmation") String confirmPassword,
-            @Field("device_name") String device_name
+            @Field("device_name") String device_name,
+            @Field("otp") String otp
             );
+
+    @FormUrlEncoded
+    @POST("auth/user/registration")
+    Call<RegistrationResponse> sendUserData(
+            @Field("name") String name,
+            @Field("email") String email,
+            @Field("phone") String phone,
+            @Field("password") String password,
+            @Field("password_confirmation") String confirmPassword,
+            @Field("device_name") String device_name,
+            @Field("otp") String otp
+    );
 
     @FormUrlEncoded
     @POST("auth/user/login")

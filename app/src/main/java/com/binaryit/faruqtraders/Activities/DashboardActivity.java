@@ -16,7 +16,6 @@ import android.widget.Toast;
 
 import com.binaryit.faruqtraders.API.RetrofitClient;
 import com.binaryit.faruqtraders.API.RetrofitClientWithHeader;
-import com.binaryit.faruqtraders.MainActivity;
 import com.binaryit.faruqtraders.R;
 import com.binaryit.faruqtraders.Response.UserDetailsResponse;
 
