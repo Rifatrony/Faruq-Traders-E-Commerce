@@ -152,6 +152,10 @@ public class CategoryWiseProductActivity extends AppCompatActivity implements Vi
                        detailsAdapter = new CategoryDetailsAdapter(CategoryWiseProductActivity.this, apiResponseModel);
                        recyclerView.setAdapter(detailsAdapter);
                        detailsAdapter.notifyDataSetChanged();
+
+
+                       System.out.println("\nTotal page is : " + apiResponseModel.products.pagination.total_pages);
+
                    }
                    catch (Exception e){
 

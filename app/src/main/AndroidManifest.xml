@@ -19,64 +19,67 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity
-            android:name="com.binaryit.faruqtraders.Activities.OtpActivity"
+            android:name=".Activities.SearchResultActivity"
             android:exported="false" />
         <activity
-            android:name="com.binaryit.faruqtraders.Activities.WishlistActivity"
+            android:name=".Activities.OtpActivity"
             android:exported="false" />
         <activity
-            android:name="com.binaryit.faruqtraders.Activities.OrderActivity"
+            android:name=".Activities.WishlistActivity"
             android:exported="false" />
         <activity
-            android:name="com.binaryit.faruqtraders.Activities.DashboardActivity"
+            android:name=".Activities.OrderActivity"
             android:exported="false" />
         <activity
-            android:name="com.binaryit.faruqtraders.Activities.AccountDetailsActivity"
+            android:name=".Activities.DashboardActivity"
             android:exported="false" />
         <activity
-            android:name="com.binaryit.faruqtraders.Activities.ResetPasswordActivity"
+            android:name=".Activities.AccountDetailsActivity"
             android:exported="false" />
         <activity
-            android:name="com.binaryit.faruqtraders.Activities.CheckoutNextActivity"
+            android:name=".Activities.ResetPasswordActivity"
             android:exported="false" />
         <activity
-            android:name="com.binaryit.faruqtraders.Activities.CheckoutActivity"
+            android:name=".Activities.CheckoutNextActivity"
             android:exported="false" />
         <activity
-            android:name="com.binaryit.faruqtraders.Activities.CategoryWiseProductActivity"
+            android:name=".Activities.CheckoutActivity"
             android:exported="false" />
         <activity
-            android:name="com.binaryit.faruqtraders.Activities.EachProductActivity"
+            android:name=".Activities.CategoryWiseProductActivity"
             android:exported="false" />
         <activity
-            android:name="com.binaryit.faruqtraders.Activities.AllCategoryActivity"
+            android:name=".Activities.EachProductActivity"
             android:exported="false" />
         <activity
-            android:name="com.binaryit.faruqtraders.Activities.SignUpActivity"
+            android:name=".Activities.AllCategoryActivity"
             android:exported="false" />
         <activity
-            android:name="com.binaryit.faruqtraders.Activities.MainActivity"
+            android:name=".Activities.SignUpActivity"
             android:exported="false" />
         <activity
-            android:name="com.binaryit.faruqtraders.Activities.EachCategoryActivity"
+            android:name=".Activities.MainActivity"
             android:exported="false" />
         <activity
-            android:name="com.binaryit.faruqtraders.Activities.TopCategoryActivity"
+            android:name=".Activities.EachCategoryActivity"
             android:exported="false" />
         <activity
-            android:name="com.binaryit.faruqtraders.Activities.CartActivity"
+            android:name=".Activities.TopCategoryActivity"
             android:exported="false" />
         <activity
-            android:name="com.binaryit.faruqtraders.Activities.AboutUsActivity"
+            android:name=".Activities.CartActivity"
             android:exported="false" />
         <activity
-            android:name="com.binaryit.faruqtraders.Activities.ContactUsActivity"
+            android:name=".Activities.AboutUsActivity"
             android:exported="false" />
         <activity
-            android:name="com.binaryit.faruqtraders.Activities.ProductDetailsActivity"
+            android:name=".Activities.ContactUsActivity"
             android:exported="false" />
         <activity
-            android:name="com.binaryit.faruqtraders.Activities.LoginActivity"
+            android:name=".Activities.ProductDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

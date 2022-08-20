@@ -21,7 +21,7 @@ public class CategoryResponseModel {
         this.categories = categories;
     }
 
-    public class Datum{
+    public static class Datum{
         public String name;
         public String slug;
         public String icon;
@@ -31,7 +31,7 @@ public class CategoryResponseModel {
         public ArrayList<Object> child;
     }
 
-    public class Pagination{
+    public static class Pagination{
         public int total;
         public int count;
         public int per_page;
@@ -39,7 +39,7 @@ public class CategoryResponseModel {
         public int total_pages;
     }
 
-    public class Categories{
+    public static class Categories{
         public ArrayList<Datum> data;
         public Pagination pagination;
     }

@@ -113,6 +113,11 @@ public interface ApiInterface {
             @Query("page") int page
             );
 
+    @GET("product/products")
+    Call<ApiResponseModel> searchProduct(
+            @Query("search") String search
+    );
+
     @POST("carts/add/{path}")
     Call<AddCartResponse> addToCart(
             @Path("path") String product_id,

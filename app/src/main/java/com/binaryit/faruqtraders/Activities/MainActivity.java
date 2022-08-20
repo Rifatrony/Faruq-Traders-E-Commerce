@@ -2,6 +2,7 @@ package com.binaryit.faruqtraders.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -23,10 +24,12 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.binaryit.faruqtraders.R;
+import com.binaryit.faruqtraders.Response.CategoryResponseModel;
 import com.bumptech.glide.Glide;
 import com.binaryit.faruqtraders.API.ApiInterface;
 import com.binaryit.faruqtraders.API.RetrofitClient;
@@ -72,12 +75,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             sellProductRecyclerView, topInCategoriesRecyclerView, latestProductRecyclerView,
             peoplesAreAlsoLookingForRecyclerView;
 
+
     private long backPressedTime;
     private Toast backToast;
 
     LinearLayoutManager layoutManager;
 
-    EditText searchEditText;
     TextView all_category_text_view, top_in_categories_more_product, more_product;
 
     Toolbar toolbar;
@@ -118,8 +121,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     String name, email, phone;
 
+    public  String productCategory, productName;
+
     SessionManagement sessionManagement;
     public  static UserDetailsResponse userDetailsResponse;
+
+    public static CategoryResponseModel categoryResponseModel;
+
+    ImageView searchButton;
+    EditText searchEditText;
+    String searchText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,6 +151,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         getBanner();
 
         System.out.println("User Phone: "+sessionManagement.getSessionModel().getUserPhone());
+
+        /*searchProduct.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                String product = searchProduct.getQuery().toString();
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                return false;
+            }
+        });*/
+
 
         //updateHeaderFromRegister();
 
@@ -244,12 +269,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void setListener(){
         all_category_text_view.setOnClickListener(this);
+        searchButton.setOnClickListener(this);
         top_in_categories_more_product.setOnClickListener(this);
         more_product.setOnClickListener(this);
     }
 
     private void initialization() {
 
+        //searchProduct = findViewById(R.id.searchProduct);
+        searchEditText = findViewById(R.id.searchEditText);
+        searchButton = findViewById(R.id.searchButton);
         progressBar = findViewById(R.id.progressBar);
         bannerProgressBar = findViewById(R.id.bannerProgressBar);
         bestSellingProgressBar = findViewById(R.id.bestSellingProgressBar);
@@ -571,8 +600,53 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(getApplicationContext(), TopCategoryActivity.class));
                 break;
 
+            case R.id.searchButton:
+                searchProduct();
+                break;
+
             default:
                 return;
+        }
+    }
+
+    private void searchProduct() {
+        searchText = searchEditText.getText().toString().trim();
+        if (searchText.isEmpty()){
+            showToast("Write Product Name");
+            return;
+        }
+        else {
+
+            RetrofitClient.getRetrofitClient().searchProduct(searchText).enqueue(new Callback<ApiResponseModel>() {
+                @Override
+                public void onResponse(Call<ApiResponseModel> call, Response<ApiResponseModel> response) {
+                    if (response.isSuccessful()){
+                        ApiResponseModel data;
+                        data = response.body();
+                        if (data.products.data.size()>0){
+                            Intent intent = new Intent(getApplicationContext(), SearchResultActivity.class);
+                            intent.putExtra("search_text", searchText);
+                            startActivity(intent);
+                            searchEditText.setText("");
+
+                        }
+                        else {
+                            Toast.makeText(MainActivity.this, "No product found like "+ searchText, Toast.LENGTH_SHORT).show();
+                            searchEditText.setText("");
+                        }
+
+                    }
+                    else {
+                        showToast("Not found");
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ApiResponseModel> call, Throwable t) {
+
+                }
+            });
+
         }
     }
 

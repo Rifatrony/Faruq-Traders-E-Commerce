@@ -5,6 +5,7 @@ import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
@@ -84,6 +85,7 @@ public class AllCategoryActivity extends AppCompatActivity implements View.OnCli
                     data = response.body();
                     categoriesAdapter = new CategoriesAdapter(AllCategoryActivity.this, data);
                     recyclerView.setAdapter(categoriesAdapter);
+
                 }
             }
 
@@ -95,6 +97,7 @@ public class AllCategoryActivity extends AppCompatActivity implements View.OnCli
         });
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View view) {
         switch (view.getId()){

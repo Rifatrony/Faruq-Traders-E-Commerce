@@ -89,6 +89,50 @@
 
                         </FrameLayout>
 
+                        <LinearLayout
+                            android:id="@+id/searchLinearLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/frameLayout1"
+                            android:orientation="horizontal"
+                            >
+
+                            <EditText
+                                android:id="@+id/searchEditText"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="3"
+                                android:background="@drawable/search_background"
+                                android:padding="16dp"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginEnd="10dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginBottom="10dp"
+                                android:hint="Search Product Name..."
+                                android:textSize="14sp"
+                                android:inputType="text"
+                                />
+
+                            <ImageView
+                                android:id="@+id/searchButton"
+                                android:layout_width="58dp"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/search"
+                                app:tint="@color/white"
+                                android:textColor="@color/black"
+                                android:background="@drawable/search_icon_background"
+                                android:padding="16dp"
+                                android:layout_marginEnd="16dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginBottom="10dp"
+                                />
+
+                        </LinearLayout>
+
+
                         <TextView
                             android:id="@+id/all_category"
                             android:layout_width="match_parent"
@@ -107,7 +151,7 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.0"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/frameLayout1"
+                            app:layout_constraintTop_toBottomOf="@id/searchLinearLayout"
                             app:drawableTint="@color/yellow" />
 
                         <LinearLayout
