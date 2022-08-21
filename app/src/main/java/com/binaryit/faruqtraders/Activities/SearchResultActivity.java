@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,6 +40,13 @@ public class SearchResultActivity extends AppCompatActivity {
 
         imageBack = findViewById(R.id.imageBack);
         titleTextView = findViewById(R.id.titleTextView);
+
+        imageBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
 
         if (!searchText.isEmpty()){
             titleTextView.setText(searchText);

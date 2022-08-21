@@ -69,26 +69,7 @@
                             app:layout_constraintTop_toTopOf="parent"
                             />
 
-                        <!--<EditText
-                            android:id="@+id/mainActivitySearch"
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginLeft="16dp"
-                            android:layout_marginRight="16dp"
-                            android:paddingLeft="16dp"
-                            android:paddingTop="12dp"
-                            android:paddingRight="18dp"
-                            android:paddingBottom="12dp"
-                            android:hint="@string/search_product"
 
-                            android:drawableEnd="@drawable/search"
-                            android:background="@drawable/search_background"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.0"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/viewPagerImageSlider"
-                            />-->
 
                         <TextView
                             android:id="@+id/all_category"

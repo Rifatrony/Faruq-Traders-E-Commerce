@@ -9,8 +9,10 @@ android {
         applicationId "com.binaryit.faruqtraders"
         minSdk 21
         targetSdk 32
-        versionCode 2
-        versionName "1.0.1"
+
+        // third release on 21/8/2022 with version code 3
+        versionCode 3
+        versionName "1.0.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

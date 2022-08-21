@@ -86,4 +86,77 @@ public class CategoryDetailsAdapter extends RecyclerView.Adapter<CategoryDetails
 
         }
     }
+
+    /*@Override
+    public int getItemViewType(int position) {
+        return (position == apiResponseModel.products.data.size()) ? R.layout.footer_button : R.layout.category_layout;
+    }
+
+    @NonNull
+    @Override
+    public CategoriesDetailsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
+        View itemView;
+
+        if (viewType == R.layout.category_layout){
+            itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.category_layout , parent , false);
+        }
+        else {
+            itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.footer_button , parent , false);
+        }
+
+        return new CategoriesDetailsViewHolder(itemView);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull CategoriesDetailsViewHolder holder, @SuppressLint("RecyclerView") int position) {
+
+
+        if (apiResponseModel.products.data.size() > 0){
+            holder.name.setText(apiResponseModel.products.data.get(position).name);
+            //holder.category.setText(data.products.data.get(position).slug);
+            holder.main_price.setText(apiResponseModel.products.data.get(position).price + "৳");
+            holder.discount_price.setText(apiResponseModel.products.data.get(position).discounted_price.toString() + "৳");
+            holder.main_price.setPaintFlags(holder.main_price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+
+            Glide.with(context).load(apiResponseModel.products.data.get(position).thumbnail).into(holder.imageView);
+
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, ProductDetailsActivity.class);
+                    intent.putExtra("name", apiResponseModel.products.data.get(position).name);
+                    intent.putExtra("main_price", apiResponseModel.products.data.get(position).price);
+                    intent.putExtra("discount_price", apiResponseModel.products.data.get(position).discounted_price.toString());
+                    intent.putExtra("thumbnail", apiResponseModel.products.data.get(position).thumbnail);
+                    intent.putExtra("slug", apiResponseModel.products.data.get(position).slug);
+                    intent.putExtra("id", apiResponseModel.products.data.get(position).id);
+                    context.startActivity(intent);
+
+                }
+            });
+
+        }
+    }
+
+    @Override
+    public int getItemCount() {
+        return apiResponseModel.products.data.size() + 1;
+    }
+
+    public static class CategoriesDetailsViewHolder extends RecyclerView.ViewHolder{
+
+        ImageView imageView;
+        TextView name, main_price, discount_price;
+
+        public CategoriesDetailsViewHolder(@NonNull View itemView) {
+            super(itemView);
+
+            imageView = itemView.findViewById(R.id.product_image);
+
+            name = itemView.findViewById(R.id.product_name);
+            main_price = itemView.findViewById(R.id.product_main_price);
+            discount_price = itemView.findViewById(R.id.product_discount_price);
+        }
+    }*/
 }

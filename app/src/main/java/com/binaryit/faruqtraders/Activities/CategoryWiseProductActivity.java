@@ -1,7 +1,9 @@
 package com.binaryit.faruqtraders.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatImageView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,9 +11,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.IntentFilter;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,25 +39,24 @@ public class CategoryWiseProductActivity extends AppCompatActivity implements Vi
 
     NetworkChangeListener networkChangeListener = new NetworkChangeListener();
 
-    CategoryResponseModel categoryModel;
-    FilterResponseModel filterResponseModel;
+    FrameLayout frameLayout;
+
     String slug, name, icon;
-    int position;
-    private int page = 1;
-    private static int per_page = 30;
+    public int page = 1;
 
     RecyclerView recyclerView;
     TextView titleTextView;
     AppCompatImageView imageBack;
+    ImageView nextPageButton, previousPageButton;
+    ConstraintLayout constrainLayout;
+    TextView pageNumberEditText;
 
     CategoryDetailsAdapter detailsAdapter;
     ApiInterface apiInterface;
-    VisitedProductResponse visitedProductResponse;
     ApiResponseModel apiResponseModel;
 
     ProgressDialog progressDialog;
 
-    NestedScrollView nestedScrollView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,14 +64,9 @@ public class CategoryWiseProductActivity extends AppCompatActivity implements Vi
         setContentView(R.layout.activity_category_wise_product_acivity);
 
         initialization();
-
         setListener();
 
-
-        //position = getIntent().getIntExtra("position", 0);
-
         titleTextView.setText(name);
-        setUpPagination(true);
     }
 
     private void initialization(){
@@ -77,39 +76,23 @@ public class CategoryWiseProductActivity extends AppCompatActivity implements Vi
         progressDialog = new ProgressDialog(this);
 
         imageBack = findViewById(R.id.imageBackId);
+        pageNumberEditText = findViewById(R.id.pageNumberEditText);
+        nextPageButton = findViewById(R.id.nextPageButton);
+        previousPageButton = findViewById(R.id.previousPageButton);
+        constrainLayout = findViewById(R.id.constrainLayout);
+        frameLayout = findViewById(R.id.frameLayout);
 
         titleTextView = findViewById(R.id.title);
         recyclerView = findViewById(R.id.eachCategoryRecyclerView);
 
-        nestedScrollView = findViewById(R.id.nestedScrollView);
+        fetchCategories();
 
-        fetchCategories(page);
-
-    }
-
-    private void setUpPagination(boolean isPaginationAllowed) {
-
-        if (isPaginationAllowed){
-            nestedScrollView.setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
-                if (scrollY==v.getChildAt(0).getMeasuredHeight()-v.getMeasuredHeight()){
-                    try {
-                        page = page + 1;
-                        fetchCategories(page);
-                    }catch (Exception e){
-
-                    }
-                }
-            });
-        }
-
-        else {
-            nestedScrollView.setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
-            });
-        }
     }
 
     private void setListener(){
         imageBack.setOnClickListener(this);
+        nextPageButton.setOnClickListener(this);
+        previousPageButton.setOnClickListener(this);
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -119,12 +102,22 @@ public class CategoryWiseProductActivity extends AppCompatActivity implements Vi
             case R.id.imageBackId:
                 onBackPressed();
                 break;
+
+            case R.id.nextPageButton:
+                page = page + 1;
+                fetchCategories();
+                break;
+
+            case R.id.previousPageButton:
+                page = page - 1;
+                fetchCategories();
+                break;
             default:
                 return;
         }
     }
 
-    private void fetchCategories(int page) {
+    private void fetchCategories() {
 
         progressDialog.show();
         progressDialog.setCancelable(false);
@@ -139,7 +132,7 @@ public class CategoryWiseProductActivity extends AppCompatActivity implements Vi
         recyclerView.setLayoutManager(new GridLayoutManager(CategoryWiseProductActivity.this, 2));
         apiInterface.getCategoryWiseProduct(slug, page).enqueue(new Callback<ApiResponseModel>() {
 
-            @SuppressLint("NotifyDataSetChanged")
+            @SuppressLint({"NotifyDataSetChanged", "SetTextI18n"})
             @Override
             public void onResponse(Call<ApiResponseModel> call, Response<ApiResponseModel> response) {
 
@@ -149,12 +142,40 @@ public class CategoryWiseProductActivity extends AppCompatActivity implements Vi
                    try {
                        apiResponseModel = response.body();
                        System.out.println("current page is ----- >" + apiResponseModel.products.pagination.current_page);
-                       detailsAdapter = new CategoryDetailsAdapter(CategoryWiseProductActivity.this, apiResponseModel);
-                       recyclerView.setAdapter(detailsAdapter);
-                       detailsAdapter.notifyDataSetChanged();
 
+                       pageNumberEditText.setText("Page " + apiResponseModel.products.pagination.current_page
+                               + " of " + apiResponseModel.products.pagination.total_pages);
+                       System.out.println("Total page is : " + apiResponseModel.products.pagination.total_pages);
 
-                       System.out.println("\nTotal page is : " + apiResponseModel.products.pagination.total_pages);
+                       if (apiResponseModel.products.pagination.current_page == page){
+                           detailsAdapter = new CategoryDetailsAdapter(CategoryWiseProductActivity.this, apiResponseModel);
+                           recyclerView.setAdapter(detailsAdapter);
+                           detailsAdapter.notifyDataSetChanged();
+                           previousPageButton.setEnabled(true);
+                           previousPageButton.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+                       }
+
+                       if (apiResponseModel.products.pagination.current_page == 1){
+                           System.out.println("This is the first page");
+                           previousPageButton.setEnabled(false);
+                       }
+
+                       if (apiResponseModel.products.pagination.total_pages > 1){
+                           System.out.println(String.valueOf(page + 1) + " is the next page");
+                           detailsAdapter = new CategoryDetailsAdapter(CategoryWiseProductActivity.this, apiResponseModel);
+                           recyclerView.setAdapter(detailsAdapter);
+                           detailsAdapter.notifyDataSetChanged();
+                           nextPageButton.setEnabled(true);
+                       }
+
+                       if (apiResponseModel.products.pagination.total_pages == apiResponseModel.products.pagination.current_page){
+                           System.out.println("This is the last page");
+                           nextPageButton.setEnabled(false);
+                       }
+
+                       /*if (apiResponseModel.products.pagination.current_page == apiResponseModel.products.pagination.total_pages){
+                           constrainLayout.setVisibility(View.INVISIBLE);
+                       }*/
 
                    }
                    catch (Exception e){

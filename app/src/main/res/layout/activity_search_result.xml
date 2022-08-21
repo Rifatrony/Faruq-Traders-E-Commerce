@@ -29,11 +29,10 @@
             >
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_gravity="center_vertical"
-                android:text="Showing Result for"
+                android:text="Showing Result for "
                 android:textSize="18sp"
                 android:textColor="@color/black"
                 android:layout_marginStart="16dp"
@@ -42,7 +41,6 @@
                 android:id="@+id/titleTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_gravity="center_vertical"
                 android:textStyle="bold"
                 android:textSize="20sp"
