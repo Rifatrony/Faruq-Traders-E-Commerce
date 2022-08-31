@@ -16,16 +16,15 @@ public class RetrofitClientForDelivery {
 
         if (retrofit == null){
 
-            OkHttpClient okHttpClient = new OkHttpClient.Builder().build();
+            /*OkHttpClient okHttpClient = new OkHttpClient.Builder().build();
 
             Gson gson = new GsonBuilder()
                     .setLenient()
-                    .create();
+                    .create();*/
 
             retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
-                    .client(okHttpClient)
-                    .addConverterFactory(GsonConverterFactory.create(gson))
+                    .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }
         return retrofit.create(ApiInterface.class);

@@ -121,14 +121,14 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
         accountsTextView = findViewById(R.id.accountsTextView);
         orderTextView = findViewById(R.id.orderTextView);
-        wishListTextView = findViewById(R.id.wishListTextView);
+        // wishListTextView = findViewById(R.id.wishListTextView);
     }
 
     private void setListener() {
 
         accountsTextView.setOnClickListener(this);
         orderTextView.setOnClickListener(this);
-        wishListTextView.setOnClickListener(this);
+       // wishListTextView.setOnClickListener(this);
         goToHomeTextView.setOnClickListener(this);
 
     }
@@ -186,9 +186,9 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                 startActivity(new Intent(getApplicationContext(), AccountDetailsActivity.class));
                 break;
 
-            case R.id.wishListTextView:
+            /*case R.id.wishListTextView:
                 startActivity(new Intent(getApplicationContext(), WishlistActivity.class));
-                break;
+                break;*/
 
         }
     }

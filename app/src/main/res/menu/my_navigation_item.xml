@@ -32,11 +32,11 @@
                 android:title="Cart"
                 />
 
-            <item
+            <!--<item
                 android:id="@+id/nav_favourite"
                 android:icon="@drawable/favorite"
                 android:title="Wishlist"
-                />
+                />-->
 
         </menu>
     </item>

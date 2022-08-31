@@ -187,7 +187,7 @@
                         android:layout_marginRight="35dp"
                         />
 
-                    <TextView
+                    <!--<TextView
                         android:id="@+id/wishListTextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -208,7 +208,7 @@
                         android:background="@color/black"
                         android:layout_marginLeft="30dp"
                         android:layout_marginRight="35dp"
-                        />
+                        />-->
 
                     <TextView
                         android:id="@+id/goToHomeTextView"

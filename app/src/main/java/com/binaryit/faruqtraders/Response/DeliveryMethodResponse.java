@@ -6,6 +6,9 @@ public class DeliveryMethodResponse {
     public String name;
     public String rate;
 
+    public DeliveryMethodResponse() {
+    }
+
     public DeliveryMethodResponse(String id, String name, String rate) {
         this.id = id;
         this.name = name;

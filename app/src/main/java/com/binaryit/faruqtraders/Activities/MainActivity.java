@@ -230,10 +230,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         startActivity(new Intent(getApplicationContext(), OrderActivity.class));
                         break;
 
-                    case R.id.nav_favourite:
+                    /*case R.id.nav_favourite:
                         startActivity(new Intent(getApplicationContext(), WishlistActivity.class));
                         //Toast.makeText(MainActivity.this, "Favourite", Toast.LENGTH_SHORT).show();
-                        break;
+                        break;*/
 
                     case R.id.nav_logout:
                         signOut();
@@ -332,9 +332,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void updateHeaderFromRegister(){
-
-
-
     }
 
     /*Update navigation header*/

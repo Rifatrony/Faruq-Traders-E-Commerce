@@ -16,4 +16,6 @@
     <color name="blue">#138CEC</color>
     <color name="input_background">#ECECEC</color>
     <color name="main_price_text_color">#5C6871</color>
+    <color name="page_background">#E4EBF5</color>
+
 </resources>

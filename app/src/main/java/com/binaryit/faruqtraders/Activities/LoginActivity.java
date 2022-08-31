@@ -104,8 +104,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 startActivity(new Intent(getApplicationContext(), SignUpActivity.class));
                 finish();
                 break;
+
             case R.id.lostYourPassword:
-                startActivity(new Intent(getApplicationContext(), ResetPasswordActivity.class));
+                startActivity(new Intent(getApplicationContext(), LostPasswordActivity.class));
                 break;
 
             case R.id.loginButton:

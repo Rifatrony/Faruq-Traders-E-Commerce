@@ -19,6 +19,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity
+            android:name=".Activities.LostPasswordActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activities.SearchResultActivity"
             android:exported="false" />
         <activity

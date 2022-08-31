@@ -22,6 +22,7 @@ import com.binaryit.faruqtraders.API.RetrofitClientForDelivery;
 import com.binaryit.faruqtraders.Adapter.DeliveryMethodAdapter;
 import com.binaryit.faruqtraders.R;
 import com.binaryit.faruqtraders.Response.DeliveryMethodResponse;
+import com.binaryit.faruqtraders.Session.SessionManagement;
 import com.binaryit.faruqtraders.Utility.NetworkChangeListener;
 
 import java.util.ArrayList;
@@ -53,6 +54,7 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
     List<DeliveryMethodResponse> deliveryMethodResponseList;
 
     ApiInterface apiInterface;
+    SessionManagement sessionManagement;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,28 +80,33 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
         adapter = new DeliveryMethodAdapter(CheckoutActivity.this, deliveryMethodResponseList);
         deliveryTypeRecyclerView.setAdapter(adapter);
 
-        apiInterface.getDeliveryCharge().enqueue(new Callback<List<DeliveryMethodResponse>>() {
-            @SuppressLint("NotifyDataSetChanged")
-            @Override
-            public void onResponse(Call<List<DeliveryMethodResponse>> call, Response<List<DeliveryMethodResponse>> response) {
-                if (response.body() != null && response.isSuccessful()){
-                    //deliveryMethodResponseList = response.body();
-                    deliveryMethodResponseList.addAll(response.body());
+        sessionManagement = new SessionManagement(this);
+        if (!sessionManagement.getSessionModel().getAccessToken().equals("null")){
+            RetrofitClient.getRetrofitClient().getDeliveryCharge().enqueue(new Callback<List<DeliveryMethodResponse>>() {
+                @SuppressLint("NotifyDataSetChanged")
+                @Override
+                public void onResponse(Call<List<DeliveryMethodResponse>> call, Response<List<DeliveryMethodResponse>> response) {
+                    if (response.body() != null && response.isSuccessful()){
+                        deliveryMethodResponseList = response.body();
+                        //deliveryMethodResponseList.addAll(response.body());
                     /*adapter = new DeliveryMethodAdapter(CheckoutActivity.this, deliveryMethodResponseList);
                     deliveryTypeRecyclerView.setAdapter(adapter);*/
-                    System.out.println("List size "+ deliveryMethodResponseList.size());
+                        System.out.println("List size "+ deliveryMethodResponseList.size());
 
+                    }
+                    else {
+                        System.out.println("Else : " + response.errorBody().toString());
+                    }
                 }
-                else {
-                    System.out.println("Else : " + response.errorBody().toString());
-                }
-            }
 
-            @Override
-            public void onFailure(Call<List<DeliveryMethodResponse>> call, Throwable t) {
-                System.out.println("Failure : " + t.getMessage().toString());
-            }
-        });
+                @Override
+                public void onFailure(Call<List<DeliveryMethodResponse>> call, Throwable t) {
+                    System.out.println("Failure : " + t.getMessage().toString());
+                }
+            });
+        }
+
+
 
     }
 
