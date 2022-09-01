@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.OrderActivity">
+    tools:context=".Activities.OrderDetailsActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -31,7 +31,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="@string/order"
+                android:text="Order Details"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold"
@@ -80,6 +80,14 @@
                         android:textStyle="bold"
                         android:padding="10dp"/>
 
+                    <TextView
+                        android:text="Payment"
+                        android:textSize="16sp"
+                        android:textColor="@color/white"
+                        android:layout_column="1"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:padding="10dp"/>
 
                     <TextView
                         android:text="Quantity"

@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.binaryit.faruqtraders.API.ApiInterface;
 import com.binaryit.faruqtraders.API.RetrofitClient;
 import com.binaryit.faruqtraders.API.RetrofitClientForDelivery;
+import com.binaryit.faruqtraders.API.RetrofitClientWithHeader;
 import com.binaryit.faruqtraders.Adapter.DeliveryMethodAdapter;
 import com.binaryit.faruqtraders.R;
 import com.binaryit.faruqtraders.Response.DeliveryMethodResponse;
@@ -51,6 +52,7 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
 
     RecyclerView deliveryTypeRecyclerView;
     DeliveryMethodAdapter adapter;
+
     List<DeliveryMethodResponse> deliveryMethodResponseList;
 
     ApiInterface apiInterface;
@@ -82,15 +84,14 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
 
         sessionManagement = new SessionManagement(this);
         if (!sessionManagement.getSessionModel().getAccessToken().equals("null")){
-            RetrofitClient.getRetrofitClient().getDeliveryCharge().enqueue(new Callback<List<DeliveryMethodResponse>>() {
+            RetrofitClientWithHeader.getRetrofitClient(this).getDeliveryCharge().enqueue(new Callback<List<DeliveryMethodResponse>>() {
                 @SuppressLint("NotifyDataSetChanged")
                 @Override
                 public void onResponse(Call<List<DeliveryMethodResponse>> call, Response<List<DeliveryMethodResponse>> response) {
                     if (response.body() != null && response.isSuccessful()){
-                        deliveryMethodResponseList = response.body();
-                        //deliveryMethodResponseList.addAll(response.body());
-                    /*adapter = new DeliveryMethodAdapter(CheckoutActivity.this, deliveryMethodResponseList);
-                    deliveryTypeRecyclerView.setAdapter(adapter);*/
+                        deliveryMethodResponseList.addAll(response.body());
+                        adapter = new DeliveryMethodAdapter(CheckoutActivity.this, deliveryMethodResponseList);
+                        deliveryTypeRecyclerView.setAdapter(adapter);
                         System.out.println("List size "+ deliveryMethodResponseList.size());
 
                     }

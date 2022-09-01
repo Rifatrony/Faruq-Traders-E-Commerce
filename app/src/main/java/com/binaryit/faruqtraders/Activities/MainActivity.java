@@ -88,10 +88,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     NavigationView navigationView;
     //BottomNavigationView bottomNavigationView;
 
-    ViewPager2 viewPager2;
     List<ImageModel> imageModelList;
-    ImageAdapter adapter;
-    Handler slideHandler = new Handler();
 
     LatestProductAdapter latestProductAdapter;
     FeatureAdapter featureAdapter;
@@ -102,7 +99,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     BannerAdapter bannerAdapter;
 
     ApiInterface apiInterface;
-    //public static ApiResponseModel apiResponseData;
     public static ApiResponseModel apiResponseData;
     VisitedProductResponse visitedProductResponse;
     BannerResponse bannerResponse;

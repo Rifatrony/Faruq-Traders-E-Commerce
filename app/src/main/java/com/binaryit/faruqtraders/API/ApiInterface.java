@@ -8,6 +8,7 @@ import com.binaryit.faruqtraders.Response.CartResponseModel;
 import com.binaryit.faruqtraders.Response.CategoryResponseModel;
 import com.binaryit.faruqtraders.Response.DeleteResponse;
 import com.binaryit.faruqtraders.Response.DeliveryMethodResponse;
+import com.binaryit.faruqtraders.Response.DetailsOrderResponse;
 import com.binaryit.faruqtraders.Response.OrderDetailsResponse;
 import com.binaryit.faruqtraders.Response.OrderResponse;
 import com.binaryit.faruqtraders.Response.ProductDetailsResponseModel;
@@ -164,9 +165,9 @@ public interface ApiInterface {
     @GET("user/orders")
     Call<OrderDetailsResponse> getOrder();
 
-    @GET("user/order/details/")
-    Call<DeliveryMethodResponse> getOrderDetails(
-            @Query("order_id") String order_id
+    @GET("user/order/details/{path}")
+    Call<DetailsOrderResponse> getOrderDetails(
+            @Path("path") String order_id
     );
 
 

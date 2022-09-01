@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:stretchColumns="1,2,3,4,5"
+    android:layout_height="wrap_content"
+    android:stretchColumns="1,2,3,4"
     android:padding="10dp"
     >
 
@@ -10,20 +10,12 @@
 
         <TextView
             android:id="@+id/order_tv"
-            android:text="Order"
+            android:text="Order ID"
             android:textSize="24sp"
-            android:textColor="@color/black"
+            android:textColor="@color/blue"
             android:layout_column="1"
             android:gravity="center"
-            android:padding="20dp"/>
-
-        <TextView
-            android:id="@+id/date_tv"
-            android:text="Date"
-            android:textSize="24sp"
-            android:textColor="@color/black"
-            android:layout_column="1"
-            android:gravity="center"
+            android:textStyle="bold"
             android:padding="20dp"/>
 
         <TextView
@@ -33,24 +25,28 @@
             android:textColor="@color/black"
             android:layout_column="1"
             android:gravity="center"
+            android:textStyle="bold"
             android:padding="20dp"/>
 
+
         <TextView
-            android:id="@+id/total_tv"
-            android:text="Total"
+            android:id="@+id/quantity_tv"
+            android:text="Quantity"
             android:textSize="24sp"
             android:textColor="@color/black"
             android:layout_column="1"
             android:gravity="center"
+            android:textStyle="bold"
             android:padding="20dp"/>
 
         <TextView
-            android:id="@+id/action_tv"
-            android:text="Action"
+            android:id="@+id/amount_tv"
+            android:text="Amount"
             android:textSize="24sp"
             android:textColor="@color/black"
             android:layout_column="1"
             android:gravity="center"
+            android:textStyle="bold"
             android:padding="20dp"/>
 
     </TableRow>

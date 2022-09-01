@@ -14,6 +14,11 @@ public class RetrofitClientForDelivery {
 
     public static ApiInterface getRetrofitClient(){
 
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
+        OkHttpClient okHttpClient = new OkHttpClient.Builder().build();
+
         if (retrofit == null){
 
             /*OkHttpClient okHttpClient = new OkHttpClient.Builder().build();
@@ -22,10 +27,17 @@ public class RetrofitClientForDelivery {
                     .setLenient()
                     .create();*/
 
+
             retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
-                    .addConverterFactory(GsonConverterFactory.create())
+                    .client(okHttpClient)
+                    .addConverterFactory(GsonConverterFactory.create(gson))
                     .build();
+
+            /*retrofit = new Retrofit.Builder()
+                    .baseUrl(BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();*/
         }
         return retrofit.create(ApiInterface.class);
     }

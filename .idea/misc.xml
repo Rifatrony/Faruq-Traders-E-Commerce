@@ -38,15 +38,21 @@
         <entry key="..\:/Faruq-Traders-E-Commerce/app/src/main/res/layout-xlarge/activity_main.xml" value="0.153125" />
         <entry key="..\:/Faruq-Traders-E-Commerce/app/src/main/res/layout-xlarge/activity_product_details.xml" value="0.12638888888888888" />
         <entry key="..\:/Faruq-Traders-E-Commerce/app/src/main/res/layout-xlarge/nav_header.xml" value="0.16" />
+        <entry key="..\:/Faruq-Traders-E-Commerce/app/src/main/res/layout-xlarge/order_layout.xml" value="0.18" />
         <entry key="..\:/Faruq-Traders-E-Commerce/app/src/main/res/layout/activity_about_us.xml" value="0.20416666666666666" />
+        <entry key="..\:/Faruq-Traders-E-Commerce/app/src/main/res/layout/activity_account_details.xml" value="0.20416666666666666" />
         <entry key="..\:/Faruq-Traders-E-Commerce/app/src/main/res/layout/activity_cart.xml" value="0.20416666666666666" />
+        <entry key="..\:/Faruq-Traders-E-Commerce/app/src/main/res/layout/activity_category.xml" value="0.20416666666666666" />
         <entry key="..\:/Faruq-Traders-E-Commerce/app/src/main/res/layout/activity_category_wise_product_acivity.xml" value="0.18611111111111112" />
         <entry key="..\:/Faruq-Traders-E-Commerce/app/src/main/res/layout/activity_checkout.xml" value="0.1675929884566054" />
         <entry key="..\:/Faruq-Traders-E-Commerce/app/src/main/res/layout/activity_checkout_next.xml" value="0.18981481481481483" />
         <entry key="..\:/Faruq-Traders-E-Commerce/app/src/main/res/layout/activity_dashboard.xml" value="0.18981481481481483" />
+        <entry key="..\:/Faruq-Traders-E-Commerce/app/src/main/res/layout/activity_each_product.xml" value="0.20416666666666666" />
         <entry key="..\:/Faruq-Traders-E-Commerce/app/src/main/res/layout/activity_login.xml" value="0.20416666666666666" />
         <entry key="..\:/Faruq-Traders-E-Commerce/app/src/main/res/layout/activity_lost_password.xml" value="0.20416666666666666" />
         <entry key="..\:/Faruq-Traders-E-Commerce/app/src/main/res/layout/activity_main.xml" value="0.18891566265060242" />
+        <entry key="..\:/Faruq-Traders-E-Commerce/app/src/main/res/layout/activity_order.xml" value="0.20416666666666666" />
+        <entry key="..\:/Faruq-Traders-E-Commerce/app/src/main/res/layout/activity_order_details.xml" value="0.20416666666666666" />
         <entry key="..\:/Faruq-Traders-E-Commerce/app/src/main/res/layout/activity_otp.xml" value="0.1" />
         <entry key="..\:/Faruq-Traders-E-Commerce/app/src/main/res/layout/activity_product_details.xml" value="0.16585365853658537" />
         <entry key="..\:/Faruq-Traders-E-Commerce/app/src/main/res/layout/activity_search_result.xml" value="0.20416666666666666" />
@@ -56,6 +62,7 @@
         <entry key="..\:/Faruq-Traders-E-Commerce/app/src/main/res/layout/footer_button.xml" value="0.20416666666666666" />
         <entry key="..\:/Faruq-Traders-E-Commerce/app/src/main/res/layout/nav_header.xml" value="0.20416666666666666" />
         <entry key="..\:/Faruq-Traders-E-Commerce/app/src/main/res/layout/notification_badge_layout.xml" value="0.5" />
+        <entry key="..\:/Faruq-Traders-E-Commerce/app/src/main/res/layout/order_layout.xml" value="0.20416666666666666" />
         <entry key="..\:/Faruq-Traders-E-Commerce/app/src/main/res/layout/product_layout.xml" value="0.20416666666666666" />
         <entry key="..\:/Faruq-Traders-E-Commerce/app/src/main/res/layout/search_product_layout.xml" value="0.203125" />
         <entry key="..\:/Faruq-Traders-E-Commerce/app/src/main/res/layout/toolbar_layout.xml" value="0.203125" />

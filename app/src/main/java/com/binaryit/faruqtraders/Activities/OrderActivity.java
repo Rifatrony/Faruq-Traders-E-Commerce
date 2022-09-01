@@ -2,13 +2,18 @@ package com.binaryit.faruqtraders.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
 import com.binaryit.faruqtraders.API.RetrofitClient;
+import com.binaryit.faruqtraders.API.RetrofitClientWithHeader;
+import com.binaryit.faruqtraders.Adapter.DeliveryMethodAdapter;
+import com.binaryit.faruqtraders.Adapter.OrderAdapter;
 import com.binaryit.faruqtraders.R;
 import com.binaryit.faruqtraders.Response.OrderDetailsResponse;
 
@@ -20,7 +25,8 @@ public class OrderActivity extends AppCompatActivity implements View.OnClickList
 
     AppCompatImageView imageBack;
     RecyclerView orderRecyclerView;
-    OrderDetailsResponse data;
+    OrderDetailsResponse orderDetailsResponse;
+    OrderAdapter orderAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,15 +38,27 @@ public class OrderActivity extends AppCompatActivity implements View.OnClickList
         setListener();
 
         FetchOrder();
+        orderRecyclerView.setHasFixedSize(true);
+        orderRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
     }
 
     private void FetchOrder() {
-        RetrofitClient.getRetrofitClient().getOrder().enqueue(new Callback<OrderDetailsResponse>() {
+        RetrofitClientWithHeader.getRetrofitClient(this).getOrder().enqueue(new Callback<OrderDetailsResponse>() {
             @Override
             public void onResponse(Call<OrderDetailsResponse> call, Response<OrderDetailsResponse> response) {
                 if (response.body() != null && response.isSuccessful()){
-                    Toast.makeText(OrderActivity.this, data.data.size(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(OrderActivity.this, "Has Some Order", Toast.LENGTH_SHORT).show();
+                    orderDetailsResponse = response.body();
+                    Toast.makeText(OrderActivity.this, "Size is: " + orderDetailsResponse.data.size(), Toast.LENGTH_SHORT).show();
+                    orderAdapter = new OrderAdapter(OrderActivity.this, orderDetailsResponse);
+                    orderRecyclerView.setAdapter(orderAdapter);
+
                 }
+                else {
+                    Toast.makeText(OrderActivity.this, "No Order Found", Toast.LENGTH_SHORT).show();
+                }
+                orderAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -59,6 +77,7 @@ public class OrderActivity extends AppCompatActivity implements View.OnClickList
         orderRecyclerView = findViewById(R.id.orderRecyclerView);
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View view) {
         switch (view.getId()){

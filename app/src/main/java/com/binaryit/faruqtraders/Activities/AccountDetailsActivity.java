@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.binaryit.faruqtraders.API.RetrofitClient;
+import com.binaryit.faruqtraders.API.RetrofitClientForDelivery;
 import com.binaryit.faruqtraders.API.RetrofitClientWithHeader;
 import com.binaryit.faruqtraders.R;
 import com.binaryit.faruqtraders.Response.DeleteResponse;
@@ -59,44 +60,6 @@ public class AccountDetailsActivity extends AppCompatActivity implements View.On
         imageBack.setOnClickListener(this);
     }
 
-    @SuppressLint("NonConstantResourceId")
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.saveChangesButton:
-                updateUser();
-                break;
-
-            case R.id.imageBack:
-                onBackPressed();
-                break;
-        }
-    }
-
-    private void updateUser() {
-        address = updateAddressEditText.getText().toString().trim();
-        name = updateNameEditText.getText().toString().trim();
-        email = updateEmailEditText.getText().toString().trim();
-        number = updatePhoneEditText.getText().toString().trim();
-
-        RetrofitClient.getRetrofitClient().updateProfile(name, email, number, address).enqueue(new Callback<DeleteResponse>() {
-            @Override
-            public void onResponse(Call<DeleteResponse> call, Response<DeleteResponse> response) {
-                if (response.code() == 200){
-                    Toast.makeText(AccountDetailsActivity.this, "Profile Updated", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<DeleteResponse> call, Throwable t) {
-                System.out.println("\n\n"+t.getMessage());
-                Toast.makeText(AccountDetailsActivity.this, "Failed to update profile", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-    }
-
-
     private void getProfileDetails(){
         RetrofitClientWithHeader.getRetrofitClient(this).getUserDetails().enqueue(new Callback<UserDetailsResponse>() {
             @Override
@@ -123,5 +86,45 @@ public class AccountDetailsActivity extends AppCompatActivity implements View.On
             }
         });
     }
+
+    @SuppressLint("NonConstantResourceId")
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.saveChangesButton:
+                updateUser();
+                break;
+
+            case R.id.imageBack:
+                onBackPressed();
+                break;
+        }
+    }
+
+    private void updateUser() {
+        address = updateAddressEditText.getText().toString().trim();
+        name = updateNameEditText.getText().toString().trim();
+        email = updateEmailEditText.getText().toString().trim();
+        number = updatePhoneEditText.getText().toString().trim();
+
+        RetrofitClientWithHeader.getRetrofitClient(this).updateProfile(name, email, number, address).enqueue(new Callback<DeleteResponse>() {
+            @Override
+            public void onResponse(Call<DeleteResponse> call, Response<DeleteResponse> response) {
+                if (response.isSuccessful()){
+                    Toast.makeText(AccountDetailsActivity.this, "Profile Updated", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<DeleteResponse> call, Throwable t) {
+                System.out.println("\n\n"+t.getMessage());
+                Toast.makeText(AccountDetailsActivity.this, "Failed to update profile", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
+
+
 
 }

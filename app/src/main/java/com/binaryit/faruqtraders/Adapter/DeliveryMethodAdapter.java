@@ -1,10 +1,12 @@
 package com.binaryit.faruqtraders.Adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -35,9 +37,16 @@ public class DeliveryMethodAdapter extends RecyclerView.Adapter<DeliveryMethodAd
     }
 
     @Override
-    public void onBindViewHolder(@NonNull DeliveryMethodViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull DeliveryMethodViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.nameTextView.setText(deliveryMethodResponseList.get(position).getName());
         holder.rateTextView.setText(deliveryMethodResponseList.get(position).getRate());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                System.out.println(deliveryMethodResponseList.get(position).getId());
+                Toast.makeText(context,deliveryMethodResponseList.get(position).getName() , Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override

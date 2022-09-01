@@ -17,10 +17,13 @@ import com.binaryit.faruqtraders.API.RetrofitClient;
 import com.binaryit.faruqtraders.API.RetrofitClientForDelivery;
 import com.binaryit.faruqtraders.API.RetrofitClientWithHeader;
 import com.binaryit.faruqtraders.R;
+import com.binaryit.faruqtraders.Response.DeliveryMethodResponse;
 import com.binaryit.faruqtraders.Response.OrderResponse;
 import com.binaryit.faruqtraders.Response.UserDetailsResponse;
 import com.binaryit.faruqtraders.Session.SessionManagement;
 import com.binaryit.faruqtraders.Utility.NetworkChangeListener;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -34,11 +37,12 @@ public class CheckoutNextActivity extends AppCompatActivity implements View.OnCl
     EditText nameEditText, emailEditText, numberEditText, addressEditText;
     AppCompatButton placeOrderButton;
 
-    String name, email, number, address, delivery_method;
+    String name, email, number, address, delivery_method, id = "eyJpdiI6InBjOEVURjZOdFMrY1lOOUFTMmh0Nnc9PSIsInZhbHVlIjoiRWowYmNpYXFQY1FLdzhLL2dBLzFKUT09IiwibWFjIjoiODlmZDYzNjFmNTA4ZmFlZmIwYTBmNDI0NTQ5MzcxODIxMWNlYTk0ZjgzYmIzYWEyYTdlYTNkZDhhYTJmNmIzYSJ9";
     int deliveryChargeInsideDhaka;
     SessionManagement sessionManagement;
 
     public static UserDetailsResponse userDetailsResponse;
+    List<DeliveryMethodResponse> deliveryMethodResponseList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,7 +127,7 @@ public class CheckoutNextActivity extends AppCompatActivity implements View.OnCl
 
         System.out.println("\n\n\n" + name + "\n\n\n" + email+ "\n\n\n" + number+ "\n\n\n" + address+ "\n\n\n" + delivery_method);
 
-        RetrofitClientForDelivery.getRetrofitClient().placeOrder(name, email, number, delivery_method, address).enqueue(new Callback<OrderResponse>() {
+        RetrofitClientWithHeader.getRetrofitClient(this).placeOrder(name, email, number, id, address).enqueue(new Callback<OrderResponse>() {
             @Override
             public void onResponse(Call<OrderResponse> call, Response<OrderResponse> response) {
                 if (response.body()!= null && response.isSuccessful()){
@@ -132,6 +136,7 @@ public class CheckoutNextActivity extends AppCompatActivity implements View.OnCl
                     Toast.makeText(CheckoutNextActivity.this, "Order Successful", Toast.LENGTH_SHORT).show();
                 }
                 else {
+                    System.out.println(response.errorBody());
                     Toast.makeText(CheckoutNextActivity.this, response.errorBody().toString(), Toast.LENGTH_SHORT).show();
                 }
             }
