@@ -64,38 +64,6 @@
                     android:layout_margin="10dp"
                     >
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Your Order"
-                        android:padding="16dp"
-                        android:textColor="#4CAF50"
-                        android:textSize="30sp"
-                        android:textStyle="bold"
-                        android:gravity="center_vertical"
-                        />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:padding="10dp"
-                        >
-
-                        <!--Here will have to use Table Layout-->
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Here will have to use table layout in recycler view"
-                            android:gravity="center"
-                            android:padding="16dp"
-                            />
-
-
-                    </LinearLayout>
-
-                    <!--Sub Total-->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -128,63 +96,15 @@
 
                     </LinearLayout>
 
-
-                    <!--Select Area Option-->
-
-                    <LinearLayout
+                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        >
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="center_vertical"
-                            android:text="Shipping"
-                            android:padding="16dp"
-                            android:textStyle="bold"
-                            android:textColor="#4CAF50"
-                            android:layout_marginTop="16dp"
-                            android:textSize="30sp"
-                            />
-
-                        <RadioGroup
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/radioGroup">
-
-                            <RadioButton
-                                android:id="@+id/radio_one"
-                                android:textSize="24sp"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
-                                android:text="Inside Dhaka"
-                                android:onClick="checkButton"
-                                />
-
-                            <RadioButton
-                                android:id="@+id/radio_two"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:textSize="24sp"
-                                android:layout_marginTop="10dp"
-                                android:text="Outside Dhaka"
-                                android:onClick="checkButton"/>
-
-                            <RadioButton
-                                android:id="@+id/radio_three"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:textSize="24sp"
-                                android:layout_marginTop="10dp"
-                                android:text="Gulshan and Banani Free Delivery"
-                                android:onClick="checkButton"/>
-
-                        </RadioGroup>
-
-                    </LinearLayout>
+                        android:text="Shipping Area"
+                        android:textColor="#4CAF50"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        android:layout_marginTop="10dp"
+                        />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:layout_width="match_parent"
@@ -193,57 +113,6 @@
                         android:layout_marginBottom="10dp"
                         android:id="@+id/deliveryTypeRecyclerView"
                         />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:background="@drawable/text_view_border"
-                        >
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:text="Grand Total"
-                            android:textSize="28sp"
-                            android:textColor="@color/black"
-                            android:textStyle="bold"
-                            android:padding="16dp"
-                            android:gravity="center_vertical"
-                            />
-
-                        <TextView
-                            android:id="@+id/grandTotalTextView"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="end|center_vertical"
-                            android:padding="16dp"
-                            android:textColor="@color/black"
-                            android:textStyle="bold"
-                            android:textSize="28sp"
-                            />
-
-                    </LinearLayout>
-
-
-                    <TextView
-                        android:id="@+id/nextTextView"
-                        android:layout_width="match_parent"
-                        android:layout_height="55dp"
-                        android:text="@string/next"
-                        android:textColor="#4CAF50"
-                        android:textSize="30sp"
-                        android:fontFamily="sans-serif-thin"
-                        android:textStyle="bold"
-                        android:gravity="center_vertical|end"
-                        android:paddingRight="16dp"
-                        android:paddingLeft="16dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginBottom="20dp"
-                        />
-
 
                 </LinearLayout>
 

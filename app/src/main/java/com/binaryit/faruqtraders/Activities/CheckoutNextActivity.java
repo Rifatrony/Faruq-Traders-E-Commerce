@@ -37,7 +37,7 @@ public class CheckoutNextActivity extends AppCompatActivity implements View.OnCl
     EditText nameEditText, emailEditText, numberEditText, addressEditText;
     AppCompatButton placeOrderButton;
 
-    String name, email, number, address, delivery_method, id = "eyJpdiI6InBjOEVURjZOdFMrY1lOOUFTMmh0Nnc9PSIsInZhbHVlIjoiRWowYmNpYXFQY1FLdzhLL2dBLzFKUT09IiwibWFjIjoiODlmZDYzNjFmNTA4ZmFlZmIwYTBmNDI0NTQ5MzcxODIxMWNlYTk0ZjgzYmIzYWEyYTdlYTNkZDhhYTJmNmIzYSJ9";
+    String name, email, number, address, delivery_method, id;
     int deliveryChargeInsideDhaka;
     SessionManagement sessionManagement;
 
@@ -48,6 +48,8 @@ public class CheckoutNextActivity extends AppCompatActivity implements View.OnCl
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout_next);
+
+        id = getIntent().getStringExtra("id");
 
         initialization();
         setListener();
@@ -123,7 +125,6 @@ public class CheckoutNextActivity extends AppCompatActivity implements View.OnCl
         email = emailEditText.getText().toString().trim();
         number = numberEditText.getText().toString().trim();
         address = addressEditText.getText().toString().trim();
-        delivery_method = "inside dhaka";
 
         System.out.println("\n\n\n" + name + "\n\n\n" + email+ "\n\n\n" + number+ "\n\n\n" + address+ "\n\n\n" + delivery_method);
 

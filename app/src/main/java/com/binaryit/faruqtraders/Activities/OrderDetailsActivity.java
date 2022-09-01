@@ -10,6 +10,8 @@ import com.binaryit.faruqtraders.R;
 import com.binaryit.faruqtraders.Response.DetailsOrderResponse;
 import com.binaryit.faruqtraders.Response.OrderDetailsResponse;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -17,7 +19,8 @@ import retrofit2.Response;
 public class OrderDetailsActivity extends AppCompatActivity {
 
     String order_id;
-    DetailsOrderResponse detailsOrderResponse;
+
+    List<DetailsOrderResponse> detailsOrderResponseList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,23 +29,27 @@ public class OrderDetailsActivity extends AppCompatActivity {
 
 
         order_id = getIntent().getStringExtra("order_id");
+        System.out.println("Order id is ........" + order_id);
 
-        RetrofitClientWithHeader.getRetrofitClient(this).getOrderDetails(order_id).enqueue(new Callback<DetailsOrderResponse>() {
+        RetrofitClientWithHeader.getRetrofitClient(this).getOrderDetails(order_id).enqueue(new Callback<List<DetailsOrderResponse>>() {
             @Override
-            public void onResponse(Call<DetailsOrderResponse> call, Response<DetailsOrderResponse> response) {
-                if (response.isSuccessful()){
-                    detailsOrderResponse = response.body();
-                    System.out.println("Name is : " + detailsOrderResponse.name);
-                    Toast.makeText(OrderDetailsActivity.this, "Have order Details", Toast.LENGTH_SHORT).show();
+            public void onResponse(Call<List<DetailsOrderResponse>> call, Response<List<DetailsOrderResponse>> response) {
+                if (response.body() != null){
+                    detailsOrderResponseList = response.body();
+                    System.out.println("Size is : " + detailsOrderResponseList.size());
                 }
+                if (response.body() == null){
+                    System.out.println("Response is null");
+                }
+
                 else {
-                    Toast.makeText(OrderDetailsActivity.this, "Error: "+response.errorBody().toString(), Toast.LENGTH_SHORT).show();
+                    System.out.println(response.errorBody());
                 }
             }
 
             @Override
-            public void onFailure(Call<DetailsOrderResponse> call, Throwable t) {
-                Toast.makeText(OrderDetailsActivity.this,"Failure: "+ t.getMessage().toString(), Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<List<DetailsOrderResponse>> call, Throwable t) {
+                Toast.makeText(OrderDetailsActivity.this, "Failure " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 

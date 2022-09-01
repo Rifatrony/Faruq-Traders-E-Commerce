@@ -45,15 +45,13 @@ public class OrderActivity extends AppCompatActivity implements View.OnClickList
 
     private void FetchOrder() {
         RetrofitClientWithHeader.getRetrofitClient(this).getOrder().enqueue(new Callback<OrderDetailsResponse>() {
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onResponse(Call<OrderDetailsResponse> call, Response<OrderDetailsResponse> response) {
                 if (response.body() != null && response.isSuccessful()){
-                    Toast.makeText(OrderActivity.this, "Has Some Order", Toast.LENGTH_SHORT).show();
                     orderDetailsResponse = response.body();
-                    Toast.makeText(OrderActivity.this, "Size is: " + orderDetailsResponse.data.size(), Toast.LENGTH_SHORT).show();
                     orderAdapter = new OrderAdapter(OrderActivity.this, orderDetailsResponse);
                     orderRecyclerView.setAdapter(orderAdapter);
-
                 }
                 else {
                     Toast.makeText(OrderActivity.this, "No Order Found", Toast.LENGTH_SHORT).show();

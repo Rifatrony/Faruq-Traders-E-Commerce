@@ -166,7 +166,7 @@ public interface ApiInterface {
     Call<OrderDetailsResponse> getOrder();
 
     @GET("user/order/details/{path}")
-    Call<DetailsOrderResponse> getOrderDetails(
+    Call<List<DetailsOrderResponse>> getOrderDetails(
             @Path("path") String order_id
     );
 

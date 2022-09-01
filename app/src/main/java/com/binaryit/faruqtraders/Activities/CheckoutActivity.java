@@ -6,18 +6,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.binaryit.faruqtraders.API.ApiInterface;
-import com.binaryit.faruqtraders.API.RetrofitClient;
 import com.binaryit.faruqtraders.API.RetrofitClientForDelivery;
 import com.binaryit.faruqtraders.API.RetrofitClientWithHeader;
 import com.binaryit.faruqtraders.Adapter.DeliveryMethodAdapter;
@@ -40,15 +35,10 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
     AppCompatImageView imageView;
 
     String name, email;
-    TextView nextTextView;
-    TextView subtotalAmount, grandTotalTextView;
+    TextView subtotalAmount;
 
-    RadioGroup radioGroup;
-    RadioButton radioButton;
 
     int subtotalAmountInt;
-    int grandTotal;
-    int deliveryChargeInsideDhaka = 80, deliveryChargeOutsideDhaka = 150, deliveryChargeInGulshanBanani = 0 ;
 
     RecyclerView deliveryTypeRecyclerView;
     DeliveryMethodAdapter adapter;
@@ -58,13 +48,13 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
     ApiInterface apiInterface;
     SessionManagement sessionManagement;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout);
 
         initialization();
-        //fetchDeliveryMethod();
 
         if (getIntent().getStringExtra("grandTotal") != null) {
             subtotalAmountInt = Integer.parseInt(getIntent().getStringExtra("grandTotal"));
@@ -102,13 +92,10 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
 
                 @Override
                 public void onFailure(Call<List<DeliveryMethodResponse>> call, Throwable t) {
-                    System.out.println("Failure : " + t.getMessage().toString());
+                    System.out.println("Failure : " + t.getMessage());
                 }
             });
         }
-
-
-
     }
 
 
@@ -119,18 +106,12 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
 
         imageView = findViewById(R.id.imageBack);
 
-        radioGroup = findViewById(R.id.radioGroup);
-        nextTextView = findViewById(R.id.nextTextView);
         subtotalAmount = findViewById(R.id.subtotalAmout);
-        grandTotalTextView = findViewById(R.id.grandTotalTextView);
-
-
 
     }
 
     private void setListener(){
         imageView.setOnClickListener(this);
-        nextTextView.setOnClickListener(this);
     }
 
     private void received_product_details() {
@@ -147,53 +128,8 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
             case R.id.imageBack:
                 onBackPressed();
                 return;
-
-            case R.id.nextTextView:
-                sendUserDetails();
-                break;
         }
     }
-
-    private void sendUserDetails() {
-        Intent intent = new Intent(getApplicationContext(), CheckoutNextActivity.class);
-        intent.putExtra("name", name);
-        intent.putExtra("email", email);
-        startActivity(intent);
-    }
-
-    @SuppressLint("NonConstantResourceId")
-    public void checkButton(View v) {
-        int radioId = radioGroup.getCheckedRadioButtonId();
-
-        radioButton = findViewById(radioId);
-
-        switch (radioId){
-            case R.id.radio_one:
-
-                grandTotal = subtotalAmountInt + deliveryChargeInsideDhaka;
-                grandTotalTextView.setText(String.valueOf(grandTotal) +" ৳");
-                System.out.println("Grand total " + grandTotal +" ৳");
-                break;
-
-            case R.id.radio_two:
-                grandTotal = subtotalAmountInt + deliveryChargeOutsideDhaka;
-                grandTotalTextView.setText(String.valueOf(grandTotal)+" ৳");
-                break;
-
-            case R.id.radio_three:
-                grandTotal = subtotalAmountInt + deliveryChargeInGulshanBanani;
-                grandTotalTextView.setText(String.valueOf(grandTotal)+" ৳");
-                break;
-
-        }
-        /*Toast.makeText(this, "Selected Radio Button: " + radioButton.getText(),
-                Toast.LENGTH_SHORT).show();*/
-    }
-
-    private void showToast(String message){
-        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-    }
-
 
     @Override
     protected void onStart() {

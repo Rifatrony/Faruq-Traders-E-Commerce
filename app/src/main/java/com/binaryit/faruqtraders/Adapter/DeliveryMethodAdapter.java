@@ -2,6 +2,7 @@ package com.binaryit.faruqtraders.Adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.binaryit.faruqtraders.Activities.CheckoutNextActivity;
 import com.binaryit.faruqtraders.R;
 import com.binaryit.faruqtraders.Response.DeliveryMethodResponse;
 
@@ -39,10 +41,13 @@ public class DeliveryMethodAdapter extends RecyclerView.Adapter<DeliveryMethodAd
     @Override
     public void onBindViewHolder(@NonNull DeliveryMethodViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.nameTextView.setText(deliveryMethodResponseList.get(position).getName());
-        holder.rateTextView.setText(deliveryMethodResponseList.get(position).getRate());
+        holder.rateTextView.setText("Delivery Charge: "+deliveryMethodResponseList.get(position).getRate());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(context, CheckoutNextActivity.class);
+                intent.putExtra("id", deliveryMethodResponseList.get(position).getId());
+                context.startActivity(intent);
                 System.out.println(deliveryMethodResponseList.get(position).getId());
                 Toast.makeText(context,deliveryMethodResponseList.get(position).getName() , Toast.LENGTH_SHORT).show();
             }

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class DetailsOrderResponse {
 
-    public String id, name, email, phone, address, orderid, status, sub_total, totalpayment, delivery, delivery_rate;
+    String id, name, email, phone, address, orderid, status, sub_total, totalpayment, delivery, delivery_rate;
     public Object payment_method;
     public ArrayList<Item> items;
 
