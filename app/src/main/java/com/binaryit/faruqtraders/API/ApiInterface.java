@@ -165,15 +165,13 @@ public interface ApiInterface {
     @GET("user/orders")
     Call<OrderDetailsResponse> getOrder();
 
-    @GET("user/order/details/{path}")
-    Call<List<DetailsOrderResponse>> getOrderDetails(
-            @Path("path") String order_id
+    @GET("user/order/details/{order_id}")
+    Call<DetailsOrderResponse> getOrderDetails(
+            @Path("order_id") String order_id
     );
-
 
     @GET("checkout/delivery/methods")
     Call<List<DeliveryMethodResponse>> getDeliveryCharge();
-
 
     @FormUrlEncoded
     @POST("checkout/process")

@@ -226,31 +226,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         startActivity(new Intent(getApplicationContext(), OrderActivity.class));
                         break;
 
-                    /*case R.id.nav_favourite:
-                        startActivity(new Intent(getApplicationContext(), WishlistActivity.class));
-                        //Toast.makeText(MainActivity.this, "Favourite", Toast.LENGTH_SHORT).show();
-                        break;*/
-
                     case R.id.nav_logout:
                         signOut();
                         break;
 
-                    /*case R.id.nav_share:
+                    case R.id.nav_share:
+
                         Intent intent = new Intent(Intent.ACTION_SEND);
                         intent.setType("text/plain");
                         intent.putExtra(Intent.EXTRA_SUBJECT,"Check this application");
-                        intent.putExtra(Intent.EXTRA_TEXT,"https://play.google.com/store/apps/details?id=com.whatsapp");
+                        intent.putExtra(Intent.EXTRA_TEXT,"https://play.google.com/store/apps/details?id=com.binaryit.faruqtraders");
                         startActivity(Intent.createChooser(intent,"Share Via"));
-                        break;*/
+                        break;
 
                     case R.id.nav_contact:
                         startActivity(new Intent(getApplicationContext(), ContactUsActivity.class));
                         //overridePendingTransition(0,0);
                         break;
-
-                    /*case R.id.nav_about_us:
-                        startActivity(new Intent(getApplicationContext(), AboutUsActivity.class));
-                        break;*/
 
                     default:
                         return true;
@@ -325,9 +317,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         sessionManagement = new SessionManagement(this);
 
 
-    }
-
-    private void updateHeaderFromRegister(){
     }
 
     /*Update navigation header*/

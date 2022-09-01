@@ -42,11 +42,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     TextView textCreateNewAccount, lostYourPasswordTextView;
     AppCompatButton signInButton;
     EditText loginNumberEditText, loginPasswordEditText;
-    CircleImageView facebook, google;
-
-    GoogleSignInOptions gso;
-    GoogleSignInClient gsc;
-    LoginResponse loginResponse;
 
     SessionManagement sessionManagement;
 
@@ -75,12 +70,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         progressBar = findViewById(R.id.progressBar);
 
-        facebook = findViewById(R.id.facebookLogin);
-        google = findViewById(R.id.googleLogin);
-
-        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
-        gsc = GoogleSignIn.getClient(this,gso);
-
 
         sessionManagement = new SessionManagement(this);
 
@@ -91,9 +80,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         textCreateNewAccount.setOnClickListener(this);
         lostYourPasswordTextView.setOnClickListener(this);
         signInButton.setOnClickListener(this);
-        facebook.setOnClickListener(this);
-        google.setOnClickListener(this);
-
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -112,20 +98,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.loginButton:
                 userLogin();
                 break;
-
-            case R.id.facebookLogin:
-                //showToast("Facebook Login");
-                break;
-
-            case R.id.googleLogin:
-                //googleLogin();
-                break;
         }
-    }
-
-    private void googleLogin(){
-        Intent intent = gsc.getSignInIntent();
-        startActivityForResult(intent, 1000);
     }
 
     @Override
@@ -167,7 +140,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             showToast("Minimum Password is 8");
             return;
         } else {
-            //login();
             Login(loginEmail, loginPassword, "");
 
         }
@@ -226,9 +198,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
             finish();
         }
-        else {
 
-        }
         super.onStart();
     }
 

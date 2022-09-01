@@ -22,6 +22,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.orderViewHol
 
     Context context;
     OrderDetailsResponse orderDetailsResponse;
+    double amount;
 
     public OrderAdapter(Context context, OrderDetailsResponse orderDetailsResponse) {
         this.context = context;
@@ -41,15 +42,15 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.orderViewHol
         holder.order_tv.setText(orderDetailsResponse.data.get(position).orderid);
         holder.status_tv.setText(orderDetailsResponse.data.get(position).status);
         holder.quantity_tv.setText(String.valueOf(orderDetailsResponse.data.get(position).quantity));
-        holder.amount_tv.setText(String.valueOf(orderDetailsResponse.data.get(position).amount));
+        amount = orderDetailsResponse.data.get(position).amount;
+        holder.amount_tv.setText(String.valueOf(amount));
 
         holder.order_tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, OrderDetailsActivity.class);
-                intent.putExtra("order_id", orderDetailsResponse.data.get(position).orderid);
+                intent.putExtra("order_id", orderDetailsResponse.data.get(position).id);
                 context.startActivity(intent);
-                Toast.makeText(context, orderDetailsResponse.data.get(position).orderid, Toast.LENGTH_SHORT).show();
             }
         });
     }
