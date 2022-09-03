@@ -24,7 +24,7 @@ public class OrderDetailsActivity extends AppCompatActivity {
 
     String order_id;
     TextView orderIdTextView, statusTextView, addressTextView, subTotalTextView, deliveryChargeTextView,
-            totalTextView, totalItemTextView, deliveryCategoryTextView;
+            totalTextView, totalItemTextView, deliveryCategoryTextView, numberTextView, paymentTextView;
 
     AppCompatImageView imageBack;
     RecyclerView itemRecyclerView;
@@ -47,6 +47,8 @@ public class OrderDetailsActivity extends AppCompatActivity {
         totalTextView = findViewById(R.id.totalTextView);
         totalItemTextView = findViewById(R.id.totalItemTextView);
         deliveryCategoryTextView = findViewById(R.id.deliveryCategoryTextView);
+        numberTextView = findViewById(R.id.numberTextView);
+        paymentTextView = findViewById(R.id.paymentTextView);
         imageBack = findViewById(R.id.imageBack);
 
         imageBack.setOnClickListener(new View.OnClickListener() {
@@ -71,11 +73,13 @@ public class OrderDetailsActivity extends AppCompatActivity {
                     assert detailsOrderResponse != null;
                     orderIdTextView.setText(detailsOrderResponse.orderid);
                     statusTextView.setText(detailsOrderResponse.status);
+                    numberTextView.setText(detailsOrderResponse.phone);
                     deliveryCategoryTextView.setText(detailsOrderResponse.delivery);
                     subTotalTextView.setText(detailsOrderResponse.sub_total);
                     deliveryChargeTextView.setText(detailsOrderResponse.delivery_rate);
                     addressTextView.setText(detailsOrderResponse.address);
                     totalTextView.setText(detailsOrderResponse.total);
+                    paymentTextView.setText(detailsOrderResponse.payment);
                     size = detailsOrderResponse.items.size();
                     totalItemTextView.setText(String.valueOf(size));
                     System.out.println(String.valueOf(detailsOrderResponse.items.size()));

@@ -81,10 +81,8 @@ public class ResetPasswordActivity extends AppCompatActivity implements View.OnC
         }
 
         if (!newPasswordString.equals(confirmPasswordString)) {
-
             showToast("Password and Confirm Password Should be Same");
             return;
-
         }
 
         else {

@@ -3,6 +3,7 @@ package com.binaryit.faruqtraders.Activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -17,7 +18,7 @@ import java.util.regex.Pattern;
 public class LostPasswordActivity extends AppCompatActivity {
 
     EditText emailEditText;
-    AppCompatButton submitButton;
+    AppCompatButton submitButton, okButton;
     ProgressBar progressBar;
     String email;
 
@@ -33,6 +34,7 @@ public class LostPasswordActivity extends AppCompatActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 email = emailEditText.getText().toString().trim();
                 if (email.isEmpty()){
                     Toast.makeText(LostPasswordActivity.this, "Enter a email address", Toast.LENGTH_SHORT).show();
@@ -51,8 +53,19 @@ public class LostPasswordActivity extends AppCompatActivity {
     }
 
     private void forgetPassword() {
-        progressBar.setVisibility(View.VISIBLE);
-        submitButton.setVisibility(View.INVISIBLE);
+        /*progressBar.setVisibility(View.VISIBLE);
+        submitButton.setVisibility(View.INVISIBLE);*/
+
+        Dialog dialog = new Dialog(LostPasswordActivity.this);
+        dialog.setContentView(R.layout.success_pop_up_layout);
+        okButton = dialog.findViewById(R.id.okButton);
+        okButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
 
     }
 }
