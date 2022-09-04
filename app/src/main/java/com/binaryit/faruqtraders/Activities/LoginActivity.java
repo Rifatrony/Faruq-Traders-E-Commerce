@@ -45,7 +45,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     SessionManagement sessionManagement;
 
-    String loginEmail;
+    String loginNumber;
     String loginPassword;
 
     ProgressBar progressBar;
@@ -91,9 +91,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 finish();
                 break;
 
-            case R.id.lostYourPassword:
+            /*case R.id.lostYourPassword:
                 startActivity(new Intent(getApplicationContext(), LostPasswordActivity.class));
-                break;
+                break;*/
 
             case R.id.loginButton:
                 userLogin();
@@ -125,10 +125,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void userLogin() {
-        loginEmail = loginNumberEditText.getText().toString().trim();
+
+        loginNumber = loginNumberEditText.getText().toString().trim();
         loginPassword = loginPasswordEditText.getText().toString().trim();
 
-        if (loginEmail.isEmpty()) {
+        if (loginNumber.isEmpty()) {
             showToast("Enter Number");
             return;
         }
@@ -140,21 +141,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             showToast("Minimum Password is 8");
             return;
         } else {
-            Login(loginEmail, loginPassword, "");
+            Login();
 
         }
     }
 
     /*Phone Number Login*/
 
-    private void Login(String phone, String password, String device_name) {
+    private void Login() {
 
         signInButton.setVisibility(View.INVISIBLE);
 
         progressBar.setVisibility(View.VISIBLE);
 
 
-        RetrofitClient.getRetrofitClient().userLogin(phone, password, "redmi").enqueue(new Callback<UserRegisterResponse>() {
+        RetrofitClient.getRetrofitClient().userLogin(loginNumber, loginPassword, "redmi").enqueue(new Callback<UserRegisterResponse>() {
             @Override
             public void onResponse(Call<UserRegisterResponse> call, Response<UserRegisterResponse> response) {
                 if (response.body() != null){
@@ -162,7 +163,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     progressBar.setVisibility(View.GONE);
                     showToast("Login Successfully");
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                    SessionDataModel dataModel = new SessionDataModel(response.body().getAccess_token(), loginEmail, loginPassword);
+                    SessionDataModel dataModel = new SessionDataModel(response.body().getAccess_token(), loginNumber, loginPassword);
                     sessionManagement.setLoginSession(dataModel);
                     finish();
 

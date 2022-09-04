@@ -13,6 +13,7 @@ import com.binaryit.faruqtraders.Response.OrderDetailsResponse;
 import com.binaryit.faruqtraders.Response.OrderResponse;
 import com.binaryit.faruqtraders.Response.ProductDetailsResponseModel;
 import com.binaryit.faruqtraders.Response.RegistrationResponse;
+import com.binaryit.faruqtraders.Response.ResetPasswordResponse;
 import com.binaryit.faruqtraders.Response.UserDetailsResponse;
 import com.binaryit.faruqtraders.Response.UserRegisterResponse;
 import com.binaryit.faruqtraders.Response.VisitedProductResponse;
@@ -63,6 +64,15 @@ public interface ApiInterface {
             @Field("password") String password,
             @Field("device_name") String device_name
             );
+
+    @FormUrlEncoded
+    @POST("user/reset/password")
+    Call<ResetPasswordResponse> resetPassword(
+            @Field("currentpassword") String currentpassword,
+            @Field("password") String password,
+            @Field("password_confirmation") String password_confirmation
+
+    );
 
     @GET("banners")
     Call<BannerResponse> getBanner();

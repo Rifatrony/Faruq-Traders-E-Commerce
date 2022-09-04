@@ -5,18 +5,30 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatImageView;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.binaryit.faruqtraders.API.RetrofitClientWithHeader;
 import com.binaryit.faruqtraders.R;
+import com.binaryit.faruqtraders.Response.ResetPasswordResponse;
+import com.binaryit.faruqtraders.Session.SessionManagement;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ResetPasswordActivity extends AppCompatActivity implements View.OnClickListener {
 
     AppCompatImageView imageBack;
     AppCompatButton resetPasswordButton;
     EditText oldPassword, newPassword, confirmPassword;
+
+    String oldPasswordString, newPasswordString, confirmPasswordString;
+
+    SessionManagement sessionManagement;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +43,9 @@ public class ResetPasswordActivity extends AppCompatActivity implements View.OnC
     }
 
     private void initialization(){
+
+        sessionManagement = new SessionManagement(this);
+
         imageBack = findViewById(R.id.imageBack);
         resetPasswordButton = findViewById(R.id.resetPasswordButton);
 
@@ -59,9 +74,9 @@ public class ResetPasswordActivity extends AppCompatActivity implements View.OnC
 
     private void validation() {
 
-        String oldPasswordString = oldPassword.getText().toString().trim();
-        String newPasswordString = newPassword.getText().toString().trim();
-        String confirmPasswordString = confirmPassword.getText().toString().trim();
+        oldPasswordString = oldPassword.getText().toString().trim();
+        newPasswordString = newPassword.getText().toString().trim();
+        confirmPasswordString = confirmPassword.getText().toString().trim();
 
         if (oldPasswordString.isEmpty()){
             showToast("Enter Old Password");
@@ -79,9 +94,13 @@ public class ResetPasswordActivity extends AppCompatActivity implements View.OnC
             showToast("Enter New Password");
             return;
         }
+        if (newPasswordString.equals(oldPasswordString)){
+            showToast("New password can not be same like old password");
+            return;
+        }
 
         if (!newPasswordString.equals(confirmPasswordString)) {
-            showToast("Password and Confirm Password Should be Same");
+            showToast("New Password and Confirm Password Should be Same");
             return;
         }
 
@@ -93,7 +112,22 @@ public class ResetPasswordActivity extends AppCompatActivity implements View.OnC
     }
 
     private void resetPassword(){
-        showToast("Password Changed");
+        RetrofitClientWithHeader.getRetrofitClient(this).resetPassword(oldPasswordString, newPasswordString, confirmPasswordString).enqueue(new Callback<ResetPasswordResponse>() {
+            @Override
+            public void onResponse(Call<ResetPasswordResponse> call, Response<ResetPasswordResponse> response) {
+                if (response.body() != null && response.isSuccessful()){
+                    showToast("Password Changed");
+                    sessionManagement.removeLoginSession();
+                    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                    finish();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResetPasswordResponse> call, Throwable t) {
+                showToast(t.getMessage());
+            }
+        });
     }
 
     private void showToast(String message){

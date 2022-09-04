@@ -58,9 +58,6 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         String email = getIntent().getStringExtra("email");
         String phone = getIntent().getStringExtra("phone");
 
-        System.out.println("............................\n Receive Name : " + name + "\n Receive Email : "+ email + "\n Receive Phone : " + phone);
-
-
         RetrofitClientWithHeader.getRetrofitClient(this).getUserDetails().enqueue(new Callback<UserDetailsResponse>() {
             @Override
             public void onResponse(Call<UserDetailsResponse> call, Response<UserDetailsResponse> response) {
@@ -156,7 +153,6 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
             case R.id.nav_change_password:
                 startActivity(new Intent(getApplicationContext(), ResetPasswordActivity.class));
-                Toast.makeText(this, "nav_change_password", Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.nav_wishlist:

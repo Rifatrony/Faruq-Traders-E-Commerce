@@ -284,7 +284,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         toolbar = findViewById(R.id.topAppBar);
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.navigation_view);
-        //bottomNavigationView = findViewById(R.id.bottom_nav);
 
         imageModelList = new ArrayList<>();
 
@@ -300,52 +299,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         latestProductRecyclerView = findViewById(R.id.latest_product_Recyclerview);
         bestSellingRecyclerView = findViewById(R.id.bestSellingRecyclerview);
 
-        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
-        gsc = GoogleSignIn.getClient(this, gso);
-        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
-
-        if (acct != null){
-            person_name = acct.getDisplayName();
-            person_email = acct.getEmail();
-            person_picture = acct.getPhotoUrl();
-
-            updateHeader();
-
-        }
-
-
         sessionManagement = new SessionManagement(this);
 
-
-    }
-
-    /*Update navigation header*/
-    private void updateHeader(){
-
-        NavigationView navigationView = findViewById(R.id.navigation_view);
-        View headerView = navigationView.getHeaderView(0);
-
-        TextView navUserName = headerView.findViewById(R.id.user_name);
-        TextView navUserEmail = headerView.findViewById(R.id.user_email);
-        ImageView navUserImage = headerView.findViewById(R.id.nav_user_photo);
-
-        navUserName.setText(person_name);
-        navUserEmail.setText(person_email);
-
-        Glide.with(this).load(person_picture).into(navUserImage);
     }
 
     private void signOut() {
-        gsc.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                showToast("Logout");
-                sessionManagement.removeLoginSession();
-                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-                finish();
-            }
-        });
+        showToast("Logout");
+        sessionManagement.removeLoginSession();
+        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+        finish();
     }
+
 
     private void showToast(String message){
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
@@ -557,7 +521,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onBackPressed() {
-        if (backPressedTime + 2000 >System.currentTimeMillis()){
+        if (backPressedTime + 2000 > System.currentTimeMillis()){
             finish();
             super.onBackPressed();
             return;

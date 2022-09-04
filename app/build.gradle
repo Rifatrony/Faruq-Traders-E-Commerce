@@ -10,9 +10,9 @@ android {
         minSdk 22
         targetSdk 32
 
-        // third release on 21/8/2022 with version code 3
-        versionCode 3
-        versionName "1.0.2"
+        // third release on 04/9/2022 with version code 3
+        versionCode 4
+        versionName "1.0.3"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
