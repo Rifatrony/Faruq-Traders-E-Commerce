@@ -27,8 +27,10 @@ public class CartDetailsAdapter extends RecyclerView.Adapter<CartDetailsAdapter.
 
     Context context;
     CartResponseModel cartResponseModel;
-    int subTotal, grandTotal = 0;
+    int subTotal;
     CartAdapterInterface cartAdapterInterface;
+    int quantity = 0;
+    double eachPrice = 0;
 
     public CartDetailsAdapter(Context context, CartResponseModel cartResponseModel, CartAdapterInterface cartAdapterInterface) {
         this.context = context;
@@ -57,13 +59,16 @@ public class CartDetailsAdapter extends RecyclerView.Adapter<CartDetailsAdapter.
                 holder.price.setText(cartResponseModel.data.get(position).price);
                 holder.quantity.setText(cartResponseModel.data.get(position).quantity);
 
-                System.out.println("Name : " + cartResponseModel.data.get(position).product.name);
-
                 Glide.with(context).load(cartResponseModel.data.get(position).product.thumbnail).into(holder.cartProductImage);
 
                 subTotal = (int)cartResponseModel.data.get(position).total;
 
                 holder.sub_total_amount_each_cart.setText(String.valueOf(subTotal+".0"));
+
+                eachPrice = Double.parseDouble(cartResponseModel.data.get(position).price);
+                quantity = Integer.parseInt(cartResponseModel.data.get(position).quantity);
+                System.out.println("Each Price is " + eachPrice);
+                System.out.println("Quantity is " + quantity);
 
                 String id = cartResponseModel.data.get(position).product.id;
 
@@ -88,25 +93,26 @@ public class CartDetailsAdapter extends RecyclerView.Adapter<CartDetailsAdapter.
                         });
                     }
                 });
+
                 holder.increase_image_button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+
+                        quantity = quantity + 1;
+                        System.out.println("Update Quantity is : " + quantity);
+
+                        holder.quantity.setText(String.valueOf(quantity));
 
                         RetrofitClientWithHeader.getRetrofitClient(context).incrementCart(id).enqueue(new Callback<CartResponseModel>() {
                             @Override
                             public void onResponse(Call<CartResponseModel> call, Response<CartResponseModel> response) {
                                 if (response.body() != null && response.code() == 200){
 
-                                    int qnt = Integer.parseInt(cartResponseModel.data.get(position).quantity);
-                                    qnt++;
-                                    //int qnty = Integer.parseInt(cartResponseModel.data.get(position).quantity) + 1;
-                                    holder.quantity.setText(qnt);
-                                    Toast.makeText(context, "Quantity is " + qnt, Toast.LENGTH_SHORT).show();
-                                    System.out.println("\n\nQuantity is " + qnt);
-                                    notifyDataSetChanged();
                                 }
                                 else {
                                 }
+
+                                notifyDataSetChanged();
                             }
 
                             @Override
@@ -119,13 +125,13 @@ public class CartDetailsAdapter extends RecyclerView.Adapter<CartDetailsAdapter.
                 holder.decrease_image_button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        quantity = quantity - 1;
+                        holder.quantity.setText(String.valueOf(quantity));
+
                         RetrofitClientWithHeader.getRetrofitClient(context).decrementCart(id).enqueue(new Callback<CartResponseModel>() {
                             @Override
                             public void onResponse(Call<CartResponseModel> call, Response<CartResponseModel> response) {
                                 if (response.body() != null && response.code() == 200){
-
-                                    int qnty = Integer.parseInt(cartResponseModel.data.get(position).quantity) - 1;
-                                    Toast.makeText(context, "Quantity is " + qnty, Toast.LENGTH_SHORT).show();
 
                                 }
                             }
@@ -138,26 +144,9 @@ public class CartDetailsAdapter extends RecyclerView.Adapter<CartDetailsAdapter.
                     }
                 });
 
-
-             /*   for (int i = 0; i < cartResponseModel.data.size(); i++) {
-
-                    grandTotal = grandTotal + Integer.parseInt(cartResponseModel.data.get(position).price);
-
-                }
-
-
-                cartAdapterInterface.setGrandTotal(grandTotal);
-
-*/
-
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
-
-            //int finalResult = Integer.parseInt(cartResponseModel.data.get(position).price) * Integer.parseInt(String.valueOf(cartResponseModel.data.get(position).quantity));
-           // holder.sub_total_amount_each_cart.setText(String.valueOf(finalResult) + " Tk.");
         }
     }
 

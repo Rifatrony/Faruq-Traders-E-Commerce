@@ -149,12 +149,13 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
     private void ClearCart() {
 
         RetrofitClientWithHeader.getRetrofitClient(this).ClearCart().enqueue(new Callback<DeleteResponse>() {
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onResponse(Call<DeleteResponse> call, Response<DeleteResponse> response) {
                 if (response.isSuccessful()){
                     showToast("Cart Clear");
+                    adapter.notifyDataSetChanged();
                 }
-                adapter.notifyDataSetChanged();
             }
 
             @Override
